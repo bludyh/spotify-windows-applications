@@ -1,0 +1,10 @@
+D:\Work & Study\Fontys\EI2S1\PROP\Applications\Camping Spot Application\Camping Spot Application\Camping Spot Application\bin\Debug\Camping Spot Application.exe.config
+D:\Work & Study\Fontys\EI2S1\PROP\Applications\Camping Spot Application\Camping Spot Application\Camping Spot Application\bin\Debug\Camping Spot Application.exe
+D:\Work & Study\Fontys\EI2S1\PROP\Applications\Camping Spot Application\Camping Spot Application\Camping Spot Application\bin\Debug\Camping Spot Application.pdb
+D:\Work & Study\Fontys\EI2S1\PROP\Applications\Camping Spot Application\Camping Spot Application\Camping Spot Application\obj\Debug\Camping Spot Application.csprojResolveAssemblyReference.cache
+D:\Work & Study\Fontys\EI2S1\PROP\Applications\Camping Spot Application\Camping Spot Application\Camping Spot Application\obj\Debug\Camping_Spot_Application.Form1.resources
+D:\Work & Study\Fontys\EI2S1\PROP\Applications\Camping Spot Application\Camping Spot Application\Camping Spot Application\obj\Debug\Camping_Spot_Application.Properties.Resources.resources
+D:\Work & Study\Fontys\EI2S1\PROP\Applications\Camping Spot Application\Camping Spot Application\Camping Spot Application\obj\Debug\Camping Spot Application.csproj.GenerateResource.Cache
+D:\Work & Study\Fontys\EI2S1\PROP\Applications\Camping Spot Application\Camping Spot Application\Camping Spot Application\obj\Debug\Camping Spot Application.csproj.CoreCompileInputs.cache
+D:\Work & Study\Fontys\EI2S1\PROP\Applications\Camping Spot Application\Camping Spot Application\Camping Spot Application\obj\Debug\Camping Spot Application.exe
+D:\Work & Study\Fontys\EI2S1\PROP\Applications\Camping Spot Application\Camping Spot Application\Camping Spot Application\obj\Debug\Camping Spot Application.pdb
