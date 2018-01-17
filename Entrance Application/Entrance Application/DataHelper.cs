@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 using MySql;
 using MySql.Data.MySqlClient;
+using System.Drawing;
 
 namespace Entrance_Application 
 {
@@ -16,7 +18,9 @@ namespace Entrance_Application
         private string connectionInfo;
         private MySqlConnection connection;
         Visitors v;
+        //print
        
+
 
         //constructor
         public DataHelper()
@@ -34,7 +38,8 @@ namespace Entrance_Application
         /// </summary>
         /// //Get Visistor by RFID 
         public Visitors getVisitorByRfid(string rfid) {
-            string sql = string.Format("SELECT * FROM visitor  where rfid='{0}'",rfid);
+            string sql = string.Format("SELECT visitor_id, ticket_id,ifnull(rfid,'null'),ifnull(spot_id,''),first_name,last_name,birthday,ifnull(email,''),ifnull(password,''),ifnull(phone,''),balance FROM visitor  where rfid='{0}'",rfid);
+          //  int spot = 0;
             MySqlCommand command = new MySqlCommand(sql, connection);
             try
             {
@@ -47,12 +52,14 @@ namespace Entrance_Application
                     string ln = (string)(reader["last_name"]);
                  //   string bd= (string)(reader["birthday"]);
                     string phone = null;
-                    string email = (string)(reader["email"]);
+                    string email = (string)(reader["ifnull(email,'')"]);
                     string ticket = (string)(reader["ticket_id"]);
-                    int spot = Convert.ToInt32(reader["spot_id"]);
-                    string rrfid = (string)(reader["rfid"]);
+                  
+                      //  spot = Convert.ToInt32(reader["spot_id"]);
+                    
+                    string rrfid = (string)(reader["ifnull(rfid,'null')"]);
                     //  v = new Visitors(Convert.ToString(reader["first_name"]), Convert.ToString(reader["last_name"]), Convert.ToDateTime(reader["birthday"]), Convert.ToString(reader["phone"]), Convert.ToString(reader["email"]), Convert.ToString(reader["ticket_id"]), Convert.ToString(reader["spot_id"]), Convert.ToString(reader["rfid"]));
-                    v = new Visitors(id, fname, ln, phone, email, ticket, spot, rrfid);
+                    v = new Visitors(id, fname, ln, phone, email, ticket, 0, rrfid);
                 }
             }
             catch (MySqlException e) {
@@ -84,6 +91,27 @@ namespace Entrance_Application
             }
             return list;
         }
+        //Insert new row for checking_history
+        public void InsertCheckingHistory(string rfid,string inOut)
+        {
+            Visitors v = this.getVisitorByRfid(rfid);
+            int v_id = v.Id;
+            DateTime d = DateTime.Now;
+            string s = d.ToString("yyyy-MM-dd HH:MM:ss");
+            string sql = string.Format("Insert into checking_history (history_id,visitor_id,checking_action,checking_location,checking_time) values(null,{0},'{1}','ENTRANCE',NOW())",v_id,inOut);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally { connection.Close(); }
+        }
+
         //Update checkin status when check in
         public void UpdateWhenCheckIn(string rfid) {
             Visitors v = this.getVisitorByRfid(rfid);
@@ -135,7 +163,7 @@ namespace Entrance_Application
         //Get All RFID code that has been assigned to visitor (valid RFID)
         public List<string> GetValidRFID() {
             List<string> list = new List<string>();
-            string sql = "SELECT rfid FROM visitor";
+            string sql = "SELECT rfid FROM visitor where rfid is not null";
             MySqlCommand command = new MySqlCommand(sql, connection);
             try {
                 connection.Open();
@@ -176,9 +204,8 @@ namespace Entrance_Application
             return true;
         }
         //Delete an rfid when visitor check out and withdraw money
-        public void DeleteRfid(string rfid) {
-            Visitors v = this.getVisitorByRfid(rfid);
-            string sql = string.Format("DELETE FROM visitor WHERE visitor_id='{0}'", v.Id);
+        public void DeleteRfid(int id) {
+            string sql = string.Format("update visitor set rfid=null , balance=0 where visitor_id={0}",id);
             MySqlCommand command = new MySqlCommand(sql, connection);
             try
             {
@@ -194,6 +221,7 @@ namespace Entrance_Application
                 connection.Close();
             }
         }
+     
         //Get visitor Id by rfid
         public int getVisitorIdbyRFID(string rfid) {
             int id = 0;

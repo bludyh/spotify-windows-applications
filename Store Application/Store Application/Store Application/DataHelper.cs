@@ -74,11 +74,11 @@ namespace Store_Application
 
             return result;
         }
-        //get data table for all Item of a Store   //NOT DONE YET
+        //get data table for all Item of a Store   
         public DataTable getDataOfAStore(int id)
         {
             DataTable dtTable = new DataTable();
-            string sql = string.Format("SELECT * FROM item where store_id={0}", id);
+            string sql = string.Format("SELECT item_name As NAME, item_category as CATEGORY, item_price as PRICE, item_quantity as QUANTITY, IFNULL(deposit_price,0) as DEPOSIT  FROM item where store_id={0}", id);
             MySqlCommand command = new MySqlCommand(sql, connection);
             try
             {
@@ -219,19 +219,7 @@ namespace Store_Application
             finally { connection.Close(); }
             return id;
         }
-        //Insert new record to purchase table
-        public void InsertNewRecordForPurchaseItem(int v_id, int id, int quantity,DateTime time_purchase)
-        {
-            string sql = string.Format("INSERT INTO purchase (visitor_id,item_id,item_quantity,purchase_time) VALUES ({0},{1},{2},{3})", v_id, id, quantity, time_purchase);
-            MySqlCommand command = new MySqlCommand(sql, connection);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (MySqlException ex) { MessageBox.Show(ex.Message); }
-            finally { connection.Close(); }
-        }
+  
         //Get Visitor Id by RFID
         public int GetVisitorIdByRFID(string rfid)
         {
@@ -246,6 +234,159 @@ namespace Store_Application
             catch (MySqlException ex) { MessageBox.Show(ex.Message); }
             finally { connection.Close(); }
             return v_id;
+        }
+       
+        public void UpdatePurchaseTable(int id,string rfid, string name, int quantity, string time) {
+            int item_id = this.GetIdByItemName(name);
+            int v_id = this.GetVisitorIdByRFID(rfid);
+            string sql = string.Format("INSERT INTO purchase VALUES ({0},{1},{2},{3},'{4}')",id, v_id, item_id, quantity, time);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try {
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (MySqlException ex) { MessageBox.Show(ex.Message); }
+            finally { connection.Close(); }
+        }
+        //Get All RFID code that has been assigned to visitor (valid RFID)
+        public List<string> GetValidRFID()
+        {
+            List<string> list = new List<string>();
+            string sql = "SELECT rfid FROM visitor where rfid is not null";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    list.Add((string)reader[0]);
+                }
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return list;
+        }
+        //Check is it a valid RFID
+        public bool CheckRFID(string rfid)
+        {
+            foreach (string str in this.GetValidRFID())
+            {
+                if (str == rfid)
+                    return true;
+            }
+            return false;
+        }
+        //Get visitor name by rfid
+        public string getVisitorNameByRFID(string rfid) {
+            string name = "";
+            string sql = string.Format("SELECT first_name FROM visitor WHERE rfid='{0}'", rfid);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try {
+                connection.Open();
+                name = (string)command.ExecuteScalar();
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return name;
+        }
+
+        //Get visitor Id by rfid
+        public int getVisitorIdbyRFID(string rfid)
+        {
+            int id = 0;
+            string sql = string.Format("SELECT visitor_id FROM visitor WHERE rfid='{0}'", rfid);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                id = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (MySqlException ex) { MessageBox.Show(ex.Message); }
+            finally { connection.Close(); }
+            return id;
+        }
+        //check if visitors already checked-in
+        public bool VisitorHasCheckedBefore(string rfid)
+        {
+            int id = this.getVisitorIdbyRFID(rfid);
+            List<int> list = new List<int>();
+            string sql = "SELECT visitor_id FROM checking_history";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                    list.Add(Convert.ToInt32(reader["visitor_id"]));
+            }
+            catch (MySqlException ex) { MessageBox.Show(ex.Message); }
+            finally { connection.Close(); }
+            foreach (int i in list)
+            {
+                if (i == id)
+                    return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// Increment the purchase id
+        /// <returns> purchase id after incremental</returns>
+        public int IncrementPurchaseId() {
+            int id = 0;
+            string sql = "SELECT ifnull(max(id),0) from purchase;";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try {
+                connection.Open();
+                id = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (MySqlException ex) { MessageBox.Show(ex.Message); }
+            finally { connection.Close(); }
+            return ++id;
+        }
+        //Get balance of a visitor by RFID
+        public decimal GetBalance(string rfid) {
+            decimal balance = 0;
+            string sql = string.Format("SELECT balance FROM visitor WHERE rfid='{0}'", rfid);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try {
+                connection.Open();
+                balance = Convert.ToDecimal(command.ExecuteScalar());
+            }
+            catch (MySqlException ex) { MessageBox.Show(ex.Message); }
+            finally { connection.Close(); }
+            return balance;
+        }
+        /// <summary>
+        /// Update Rental table after visitor rent items
+        /// </summary>
+        public void UpdateRentalTable(string rfid,string name,string rent_time) {
+            int v_id = this.GetVisitorIdByRFID(rfid);
+            int i_id = this.GetIdByItemName(name);
+            string sql = string.Format("INSERT INTO rental (visitor_id, item_id,rent_time, return_time) VALUES ({0},{1},'{2}',null);", v_id, i_id,rent_time);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try {
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (MySqlException ex) { MessageBox.Show(ex.Message); }
+            finally { connection.Close(); }
+        }
+       
+        //Get deposit for rent item
+        public decimal GetDeposit(string itemName) {
+            decimal price = 0;
+            string sql = string.Format("select deposit_price from item where item_name ='{0}'", itemName);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try {
+                connection.Open();
+                price = Convert.ToDecimal(command.ExecuteScalar());
+            }
+            catch (MySqlException ex) { MessageBox.Show(ex.Message); }
+            finally { connection.Close(); }
+            return price;
         }
     }
 }

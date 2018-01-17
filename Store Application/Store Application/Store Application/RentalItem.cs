@@ -10,11 +10,14 @@ namespace Store_Application
     {
         //fields
         private decimal deposit_price;
-        private DateTime rentTime;
-        private DateTime returnTime;
+        private string rentTime;
+        private string returnTime;
+
+        //properties
+       public string RentTme { set { rentTime = value; }get { return rentTime; } }
 
         //constructor
-        public RentalItem(int id, string name, string category, decimal price, int quantity, decimal deposit, DateTime rent, DateTime returnn) : base(id, name, category, price, quantity,deposit) {
+        public RentalItem(int id, string name, string category, decimal price, int quantity, decimal deposit, string rent, string returnn) : base(id, name, category, price, quantity,deposit) {
             this.deposit_price = deposit;
             this.rentTime = rent;
             this.returnTime = returnn;

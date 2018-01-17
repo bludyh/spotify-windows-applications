@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data; //for DataTable
 using System.Windows.Forms;
 
 using MySql.Data;
@@ -70,23 +70,26 @@ namespace Event_Overview_Application
             }
             return total;
         }
-        //Get Visitor History
-        public List<string> getVistorHistory(int id)
+        /// <summary>
+        /// Get Visisor History
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> string History </returns>
+      
+        public List<string> GetVisitorCheckingHistory(int id) //Get from checking_history
         {
             //get DateTIme //todo
             List<string> list = new List<string>();
-            string sql = string.Format("SELECT checking_action, checking_location, transaction_action, transaction_amount FROM checking_history c left outer join transaction t on c.visitor_id=t.visitor_id WHERE t.visitor_id={0}", id);
-         //   string sql1 = string.Format("SELECT transaction_action, transaction_amount FROM transaction WHERE visitor_id={0}", id);
+            string sql = string.Format("SELECT checking_action, checking_location, DATE_FORMAT(checking_time,'%d-%m-%y') FROM checking_history WHERE visitor_id={0}", id);
             MySqlCommand command = new MySqlCommand(sql, connection);
-         //   MySqlCommand command1 = new MySqlCommand(sql1, connection);
             try
             {
                 connection.Open();
                 MySqlDataReader reader = command.ExecuteReader();
-              //  MySqlDataReader reader1 = command1.ExecuteReader();
                 while (reader.Read())
                 {
-                    string history = (string)reader["checking_action"] + " " + (string)reader["checking_location"] + " " + (string)reader["transaction_action"] + " " + reader["transaction_amount"].ToString();
+
+                    string history = (string)reader["checking_action"] + " - " + (string)reader["checking_location"] +" - "+(string)reader["DATE_FORMAT(checking_time,'%d-%m-%y')"];
                     list.Add(history);
                 }
                
@@ -95,6 +98,28 @@ namespace Event_Overview_Application
             finally { connection.Close(); }
             return list;
         }
+        public List<string> GetVisitorTransactionHistory(int id) //Get from transaction table
+        {
+            //get DateTIme //todo
+            List<string> list = new List<string>();
+            string sql = string.Format("SELECT IFNULL(transaction_action,'NONE'), IFNULL(transaction_amount,'NONE') FROM transaction WHERE visitor_id={0}", id);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string history = (string)reader["IFNULL(transaction_action,'NONE')"] + " " + (string)reader["IFNULL(transaction_amount,'NONE')"];
+                    list.Add(history);
+                }
+
+            }
+            catch (MySqlException e) { MessageBox.Show("tHAO2"); }
+            finally { connection.Close(); }
+            return list;
+        }
+
 
         //Get camping spot by id
         public Camping getSpotbyId(int id)
@@ -104,7 +129,7 @@ namespace Event_Overview_Application
         }
         //Get Visitor by id
         public Visitors GetVisitorById(int id) {
-            string sql = string.Format("SELECT * FROM visitor  where visitor_id='{0}'", id);
+            string sql = string.Format("SELECT first_name,last_name,DATE_FORMAT(birthday,'%d-%m-%y'),IFNULL( email,''),IFNULL( phone,'None'),ticket_id,IFNULL(spot_id,0),IFNULL(rfid,'Have not assigned yet') from visitor WHERE visitor_id={0}", id);
             MySqlCommand command = new MySqlCommand(sql, connection);
             try
             {
@@ -114,13 +139,14 @@ namespace Event_Overview_Application
                 {
                     string fname = (string)(reader["first_name"]);
                     string ln = (string)(reader["last_name"]);
-                    //   string bd= (string)(reader["birthday"]);
-                    string phone = null;
-                    string email = (string)(reader["email"]);
+                    string bd = (string)reader["DATE_FORMAT(birthday,'%d-%m-%y')"];
+                    
+                    string phone = (string)reader["IFNULL( phone,'None')"];
+                    string email = (string)(reader["IFNULL( email,'')"]);
                     string ticket = (string)(reader["ticket_id"]);
-                    int spot = Convert.ToInt32(reader["spot_id"]);
-                    string rrfid = (string)(reader["rfid"]);
-                    v = new Visitors(id, fname, ln, phone, email, ticket, spot, rrfid);
+                    int spot =  Convert.ToInt32(reader["IFNULL(spot_id,0)"]);
+                    string rrfid = (string)(reader["IFNULL(rfid,'Have not assigned yet')"]);
+                    v = new Visitors(id, fname, ln,bd, phone, email, ticket, spot, rrfid);
                 }
             }
             catch (MySqlException e)
@@ -138,7 +164,7 @@ namespace Event_Overview_Application
         public List<Visitors> getListOfVisitors()
         {
             List<Visitors> listVisitors = new List<Visitors>();
-            MySqlCommand command = new MySqlCommand("SELECT visitor_id,ticket_id,rfid,IFNULL(spot_id,0),first_name,last_name,birthday,email FROM visitor", connection);
+            MySqlCommand command = new MySqlCommand("SELECT visitor_id,ticket_id,rfid,IFNULL(spot_id,0),first_name,last_name,birthday,IFNULL(email,'null') FROM visitor where rfid is not null", connection);
             try
             {
                 connection.Open();
@@ -148,14 +174,15 @@ namespace Event_Overview_Application
                     int id = Convert.ToInt32(reader["visitor_id"]);
                     string fname = (string)(reader["first_name"]);
                     string ln = (string)(reader["last_name"]);
-                    // v.Birthday = (DateTime)(reader["birthday"]);
+                    DateTime bd1 = (DateTime)reader["birthday"];
+                    string bd =bd1.ToString("DD-MM-YYYY");
                     string phone = null;
-                    string email = (string)(reader["email"]);
+                    string email = (string)(reader["IFNULL(email,'null')"]);
                     string ticket = (string)(reader["ticket_id"]);
                     // int spot = Convert.ToInt32(reader["spot_id"]);
                     int spot = 0;
                     string rfid = (string)(reader["rfid"]);
-                    v = new Visitors(id, fname, ln, phone, email, ticket, spot, rfid);
+                    v = new Visitors(id, fname, ln,bd, phone, email, ticket, spot, rfid);
                     listVisitors.Add(v);
                 }
             }
@@ -224,43 +251,7 @@ namespace Event_Overview_Application
             return id;
         }
 
-        //Get Visitor by RFID 
-        public Visitors getVisitorByRfid(string rfid)
-        {
-            //Check is this rfid code exist in database or not??????????????????????????????????
-            string sql = string.Format("SELECT * FROM visitor  where rfid='{0}'", rfid);
-            MySqlCommand command = new MySqlCommand(sql, connection);
-            try
-            {
-                connection.Open();
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    int id = Convert.ToInt32(reader["visitor_id"]);
-                    string fname = (string)(reader["first_name"]);
-                    string ln = (string)(reader["last_name"]);
-                    //   string bd= (string)(reader["birthday"]);
-                    string phone = null;
-                    string email = (string)(reader["email"]);
-                    string ticket = (string)(reader["ticket_id"]);
-                    int spot = Convert.ToInt32(reader["spot_id"]);
-                    string rrfid = (string)(reader["rfid"]);
-                    //  v = new Visitors(Convert.ToString(reader["first_name"]), Convert.ToString(reader["last_name"]), Convert.ToDateTime(reader["birthday"]), Convert.ToString(reader["phone"]), Convert.ToString(reader["email"]), Convert.ToString(reader["ticket_id"]), Convert.ToString(reader["spot_id"]), Convert.ToString(reader["rfid"]));
-                    v = new Visitors(id, fname, ln, phone, email, ticket, spot, rrfid);
-                }
-            }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return v;
-        }
-
-        //////22/11
+     
 
         //Get total balance
         public double GetTotalBalance()
@@ -278,20 +269,87 @@ namespace Event_Overview_Application
             finally { connection.Close(); }
             return total_balance;
         }
-
-        //get total spent money
-        public double GetTotalMoneySpent()
+        public double GetTotalSpentMoneyFromPurchase(string start, string end) //total money from purchase table due to day
         {
-            double total_money_spent = 0;
-            string sql = "SELECT sum(transaction_amount) FROM transaction";
+            double total = 0;
+            string sql = string.Format("SELECT IFNULL(sum(p.purchase_quantity*i.item_price),0) FROM purchase p join item i on i.item_id = p.item_id WHERE purchase_time BETWEEN '{0}' and '{1}'",start,end);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try {
+                connection.Open();
+                total =Convert.ToInt32( command.ExecuteScalar());
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return total;
+        }
+        public double GetTotalSpentMoneyFromPurchase() //total money from purchase table in general
+        {
+            double total = 0;
+            string sql = string.Format("SELECT sum(p.purchase_quantity*i.item_price) FROM purchase p join item i on i.item_id = p.item_id");
             MySqlCommand command = new MySqlCommand(sql, connection);
             try
             {
                 connection.Open();
-                total_money_spent = Convert.ToDouble(command.ExecuteScalar());
+                total = Convert.ToInt32(command.ExecuteScalar());
             }
             catch (MySqlException e) { MessageBox.Show(e.Message); }
             finally { connection.Close(); }
+            return total;
+        }
+        public double GetTotalSpentMoneyFromRental(string start, string end) //total money from rental table due to day
+        {
+            double total = 0;
+            string sql = string.Format("SELECT IFNULL(sum(if(r.return_time is null,i.item_price,i.item_price+i.deposit_price)),0) from rental r join item i on r.item_id=i.item_id WHERE rent_time BETWEEN '{0}' and '{1}'",start,end);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                total = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return total;
+        }
+        public double GetTotalSpentMoneyFromRental() //total money from rental table in general
+        { 
+            double total = 0;
+            string sql = string.Format("SELECT sum(if(r.return_time is null,i.item_price,i.item_price+i.deposit_price)) from rental r join item i on r.item_id=i.item_id ");
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                total = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return total;
+        }
+        public double GetTotalSpentMoneyFromCampingSpot() //total money from camping_spot table
+        {
+            double total = 0;
+            string sql = "SELECT sum(if(spot_price is null,0,spot_price)) from camping_spot";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                total = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return total;
+        }
+
+        //get total spent money
+        public double GetTotalMoneySpent(string start, string end)//due to day
+        {
+            double total_money_spent = 0;
+            total_money_spent = this.GetTotalSpentMoneyFromRental(start,end) + this.GetTotalSpentMoneyFromPurchase(start,end);
+            return total_money_spent;
+        }
+        public double GetTotalMoneySpent()//in general
+        {
+            double total_money_spent = 0;
+            total_money_spent = this.GetTotalSpentMoneyFromRental() + this.GetTotalSpentMoneyFromPurchase()+this.GetTotalSpentMoneyFromCampingSpot();
             return total_money_spent;
         }
 
@@ -317,12 +375,31 @@ namespace Event_Overview_Application
             finally { connection.Close(); }
             return list;
         }
+        //Get list of store 
+        public List<Store> GetListOfStore() {
+            List<Store> list = new List<Store>();
+            string sql = "Select store_id, store_name from store";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader() ;
+                while (reader.Read()) {
+                    int id = Convert.ToInt32(reader["store_id"]);
+                    string name = reader["store_name"].ToString();
+                    Store s = new Store(id, name);
+                    list.Add(s);
+                }
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return list;
+        }
         //Get List of Visitors reserved Camping spot
         public List<Visitors> GetVisitorsReservedCampingSpot(int id)
         {
             List<Visitors> list = new List<Visitors>();
             Visitors v;
-            string sql = string.Format("SELECT visitor_id,first_name,last_name,email,phone,ticket_id,rfid FROM visitor where spot_id={0}", id);
+            string sql = string.Format("SELECT visitor_id,first_name,last_name,IFNULL(email,''),phone,ticket_id,rfid FROM visitor where spot_id={0}", id);
             MySqlCommand command = new MySqlCommand(sql, connection);
             try
             {
@@ -333,13 +410,13 @@ namespace Event_Overview_Application
                     int v_id = Convert.ToInt32(reader["visitor_id"]);
                     string fname = (string)(reader["first_name"]);
                     string ln = (string)(reader["last_name"]);
-                    //   string bd= (string)(reader["birthday"]);
+                    string bd = "";
                     string phone = null;
-                    string email = (string)(reader["email"]);
+                    string email = (string)(reader["IFNULL(email,'')"]);
                     string ticket = (string)(reader["ticket_id"]);
                     string rrfid = (string)(reader["rfid"]);
                     //  v = new Visitors(Convert.ToString(reader["first_name"]), Convert.ToString(reader["last_name"]), Convert.ToDateTime(reader["birthday"]), Convert.ToString(reader["phone"]), Convert.ToString(reader["email"]), Convert.ToString(reader["ticket_id"]), Convert.ToString(reader["spot_id"]), Convert.ToString(reader["rfid"]));
-                    v = new Visitors(v_id, fname, ln, phone, email, ticket, id, rrfid);
+                    v = new Visitors(v_id, fname, ln,bd, phone, email, ticket, id, rrfid);
                     list.Add(v);
                 }
             }
@@ -401,7 +478,7 @@ namespace Event_Overview_Application
         public int TotalFreeSpots()
         {
             int result = 0;
-            string sql = "SELECT count(distinct spot_id) FROM camping_spot WHERE spot_id NOT IN (SELECT spot_id FROM visitor)";
+            string sql = "SELECT count(distinct spot_id) FROM camping_spot WHERE spot_id NOT IN (SELECT spot_id FROM visitor where spot_id is not null)";
             MySqlCommand command = new MySqlCommand(sql, connection);
             try
             {
@@ -411,6 +488,37 @@ namespace Event_Overview_Application
             catch (MySqlException e) { MessageBox.Show(e.Message); }
             finally { connection.Close(); }
             return result;
+        }
+        //Get list of Free camping spot
+        public List<Camping> ListOfFreeSpot() {
+            List<Camping> list = new List<Camping>();
+            string sql = "SELECT spot_id, location from camping_spot where spot_id not in (Select spot_id from visitor where spot_id is not null)";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    int id = Convert.ToInt32(reader["spot_id"]);
+                    string location = (string)reader["location"];
+                    Camping c = new Camping(id, location);
+                    list.Add(c);
+                }
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return list;
+        }
+        ///Check if a camping spot is free or not
+        ///return true if it is free
+        ///false if it has been booked
+        public bool IsAFreeSpot(int id) {
+            List<Camping> list = this.ListOfFreeSpot();
+            foreach (Camping c in list) {
+                if (c.Camping_id == id)
+                    return false;
+            }
+            return true;
         }
         //Total Visitor Check in//TODO
 
@@ -543,7 +651,7 @@ namespace Event_Overview_Application
             return i;
         }
         //Get total item per store
-        public int GetTotalItemPerStore(int id) {
+        public int GetTotalItemSold(int id) {
             int total = 0;
             string sql = string.Format("SELECT count(item_id) FROM item WHERE store_id={0}", id);
             MySqlCommand command = new MySqlCommand(sql, connection);
@@ -555,7 +663,157 @@ namespace Event_Overview_Application
             finally { connection.Close(); }
             return total;
         }
-        
+        //get data table for all Item of a Store   
+        public DataTable GetDataTableItem(int id)
+        {
+            DataTable dtTable = new DataTable();
+            string sql = string.Format("SELECT item_name As NAME, item_category as CATEGORY, item_price as PRICE, item_quantity as QUANTITY  FROM item where store_id={0}", id);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(dtTable);
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return dtTable;
+        }
+        //get Datatable for All visitor
+        public DataTable GetDataTableVisitor()
+        {
+            DataTable dtTable = new DataTable();
+            string sql = string.Format("SELECT visitor_id as 'ID', first_name as 'Firstname', last_name as 'Lastname', IFNULL(spot_id,'Have not booked') as 'spot ID', balance FROM visitor");
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(dtTable);
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return dtTable;
+        }
+        //Get Datatable for specific Visitor
+        public DataTable GetDataTableAVisitor(int id)
+        {
+            DataTable dtTable = new DataTable();
+            string sql = string.Format("SELECT visitor_id as 'ID', first_name as 'Firstname', last_name as 'Lastname', IFNULL(spot_id,'Have not booked') as 'spot ID', balance FROM visitor WHERE visitor_id={0}",id);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(dtTable);
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return dtTable;
+        }
+        //get Datatable for All camping spot
+        public DataTable GetDataTableSpot()
+        {
+            DataTable dtTable = new DataTable();
+            string sql = string.Format("SELECT spot_id as 'ID', location, IFNULL(spot_price,'Havent booked yet') as 'Price'FROM camping_spot");
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(dtTable);
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return dtTable;
+        }
+        //Get Datatable for a shop
+        public DataTable GetDataTableAShop(string name)
+        {
+            DataTable dtTable = new DataTable();
+            string sql = string.Format("SELECT s.store_id as ID, s.store_name as 'Name', i.item_name as 'Item name', i.item_price as 'Price', IFNULL(i.deposit_price,0) as 'Deposit', i.item_quantity as 'Quantity' FROM store s join item i on s.store_id=i.store_id WHERE store_name='{0}'",name);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(dtTable);
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return dtTable;
+        }
+        // get Datatable for all shops
+        public DataTable GetDataTableShops()
+        {
+            DataTable dtTable = new DataTable();
+            string sql = string.Format("SELECT s.store_id as ID, s.store_name as 'Name', i.item_name as 'Item name', i.item_price as 'Price', IFNULL(i.deposit_price,0) as 'Deposit', i.item_quantity as 'Quantity' FROM store s join item i on s.store_id=i.store_id");
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(dtTable);
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return dtTable;
+        }
+        ///Check a shop is purchase or rental
+        ///return true if a purchase one
+        ///return false if a rental one
+        public bool IsAPurchaseShop(int id) {
+
+            string sql = string.Format("Select IFNULL(deposit_price,0) from item where store_id={0}", id);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try {
+                connection.Open();
+               int deposit =Convert.ToInt32( command.ExecuteScalar());
+                if (deposit == 0)
+                    return true;
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return false;
+        }
+        //Get total unit sold for purchase shop
+        public int TotalUnitSold(int id) {
+            int total = 0;
+            //TODO
+                return total;
+        }
+        // get Datatable for free spots
+        public DataTable GetDatatableFreeSpot()
+        {
+            DataTable dtTable = new DataTable();
+            string sql = "select * from camping_spot where spot_id not in (select spot_id from visitor where spot_id is not null)";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(dtTable);
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return dtTable;
+        }
+        // get Datatable for booked spots
+        public DataTable GetDatatableBookedSpot()
+        {
+            DataTable dtTable = new DataTable();
+            string sql = "SELECT * from camping_spot where spot_id in (SELECT spot_id from visitor where spot_id is not null)";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(dtTable);
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { connection.Close(); }
+            return dtTable;
+        }
     }
     
 }

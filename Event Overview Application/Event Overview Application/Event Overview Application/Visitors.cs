@@ -12,7 +12,7 @@ namespace Event_Overview_Application
         private int id;
         private string firstName;
         private string lastName;
-      //  private DateTime birthday;
+        private string birthday;
         private string email;
         private string phone;
         private string ticket_id;
@@ -20,11 +20,11 @@ namespace Event_Overview_Application
         private string rfid;
 
         public Visitors() { }
-        public Visitors(int id,string fname, string lname, /*DateTime bd,*/ string phone, string email, string ticketId, int campingId, string rfid) {
+        public Visitors(int id,string fname, string lname, string bd, string phone, string email, string ticketId, int campingId, string rfid) {
            this.id = id;
             this.firstName = fname;
             this.lastName = lname;
-         //   this.birthday = bd;
+            this.birthday = bd;
             this.phone = phone;
             this.email = email;
             this.ticket_id = ticketId;
@@ -42,6 +42,7 @@ namespace Event_Overview_Application
         public string Ticket_id { set { ticket_id = value; } get { return ticket_id; } }
         public int Spot_id { set { spot_id = value; } get { return spot_id; } }
         public string Rfid { set { rfid = value; } get { return rfid; } }
+        public string Birthday { set { birthday = value; } get { return birthday; } }
         //methods
         public override string ToString()
         {

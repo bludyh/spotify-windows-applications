@@ -10,3 +10,14 @@ D:\Work & Study\Fontys\EI2S1\PROP\Applications\Balance Adjustment Application\Ba
 C:\Users\Thao Nguyen\spotify-windows-applications-master-b042b8df8fb64e806252922909058e4948cae8ea\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\bin\Debug\Balance Adjustment Application.exe.config
 C:\Users\Thao Nguyen\spotify-windows-applications-master-b042b8df8fb64e806252922909058e4948cae8ea\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\obj\Debug\Balance Adjustment Application.exe
 C:\Users\Thao Nguyen\spotify-windows-applications-master-b042b8df8fb64e806252922909058e4948cae8ea\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\obj\Debug\Balance Adjustment Application.pdb
+C:\Users\Thao Nguyen\spotify-windows-applications\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\bin\Debug\Balance Adjustment Application.exe.config
+C:\Users\Thao Nguyen\spotify-windows-applications\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\obj\Debug\Balance Adjustment Application.exe
+C:\Users\Thao Nguyen\spotify-windows-applications\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\obj\Debug\Balance Adjustment Application.pdb
+C:\Users\Thao Nguyen\spotify-windows-applications\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\bin\Debug\Balance Adjustment Application.exe
+C:\Users\Thao Nguyen\spotify-windows-applications\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\bin\Debug\Balance Adjustment Application.pdb
+C:\Users\Thao Nguyen\spotify-windows-applications\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\obj\Debug\Balance Adjustment Application.csprojResolveAssemblyReference.cache
+C:\Users\Thao Nguyen\spotify-windows-applications\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\obj\Debug\Balance_Adjustment_Application.Form1.resources
+C:\Users\Thao Nguyen\spotify-windows-applications\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\obj\Debug\Balance_Adjustment_Application.Properties.Resources.resources
+C:\Users\Thao Nguyen\spotify-windows-applications\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\obj\Debug\Balance Adjustment Application.csproj.GenerateResource.Cache
+C:\Users\Thao Nguyen\spotify-windows-applications\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\bin\Debug\MySql.Data.dll
+C:\Users\Thao Nguyen\spotify-windows-applications\Balance Adjustment Application\Balance Adjustment Application\Balance Adjustment Application\bin\Debug\MySql.Data.xml

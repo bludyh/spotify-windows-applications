@@ -12,9 +12,11 @@ namespace Store_Application
 {
     public partial class AdjustQuantity : Form
     {
+        public bool delete;
         public AdjustQuantity()
         {
             InitializeComponent();
+            delete = false;
         }
 
         private void btn_ok_Click(object sender, EventArgs e)
@@ -31,6 +33,21 @@ namespace Store_Application
                 MessageBox.Show(e.Message);
             }
             return -1;
+        }
+
+        private void AdjustQuantity_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btn_deleteItem_Click(object sender, EventArgs e)
+        {
+            delete = true;
         }
     }
 }

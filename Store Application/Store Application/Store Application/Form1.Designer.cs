@@ -26,13 +26,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lb_DateTime2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tab_Store = new System.Windows.Forms.TabControl();
+            this.tab_invetory = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btn_update = new System.Windows.Forms.Button();
             this.lb_totalProfits = new System.Windows.Forms.Label();
             this.lb_TotalUnit = new System.Windows.Forms.Label();
             this.lb_totalItem = new System.Windows.Forms.Label();
@@ -44,24 +44,25 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tab_purchase = new System.Windows.Forms.TabPage();
             this.gp_menuCart = new System.Windows.Forms.GroupBox();
+            this.lb_rfidReader = new System.Windows.Forms.Label();
             this.layout_item = new System.Windows.Forms.TableLayoutPanel();
             this.btn_snacks = new System.Windows.Forms.Button();
             this.btn_sweets = new System.Windows.Forms.Button();
             this.btn_food = new System.Windows.Forms.Button();
             this.btn_dink = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btn_printBil = new System.Windows.Forms.Button();
             this.lb_total = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.dt_cart = new System.Windows.Forms.DataGridView();
             this.button10 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lb_test = new System.Windows.Forms.Label();
             this.lb_rfid_purchase = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tab_rental = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -70,30 +71,37 @@
             this.btn_otherItems = new System.Windows.Forms.Button();
             this.btn_camera = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btn_print = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lb_rentTotal = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dt_rental = new System.Windows.Forms.DataGridView();
+            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deposit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Renttime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Return = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.lb_rfidRental = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_payRental = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.btn_printTable = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lb_nameRent = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tab_Store.SuspendLayout();
+            this.tab_invetory.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_StoreInfo)).BeginInit();
-            this.tabPage2.SuspendLayout();
+            this.tab_purchase.SuspendLayout();
             this.gp_menuCart.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dt_cart)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tab_rental.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dt_rental)).BeginInit();
@@ -103,13 +111,23 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.panel1.Controls.Add(this.lb_DateTime2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1618, 133);
+            this.panel1.Size = new System.Drawing.Size(1641, 133);
             this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // lb_DateTime2
+            // 
+            this.lb_DateTime2.AutoSize = true;
+            this.lb_DateTime2.ForeColor = System.Drawing.Color.White;
+            this.lb_DateTime2.Location = new System.Drawing.Point(1392, 108);
+            this.lb_DateTime2.Name = "lb_DateTime2";
+            this.lb_DateTime2.Size = new System.Drawing.Size(60, 20);
+            this.lb_DateTime2.TabIndex = 15;
+            this.lb_DateTime2.Text = "label14";
             // 
             // label1
             // 
@@ -121,7 +139,6 @@
             this.label1.Size = new System.Drawing.Size(386, 55);
             this.label1.TabIndex = 1;
             this.label1.Text = "Store Application";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // panel2
             // 
@@ -130,9 +147,8 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 831);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1618, 84);
+            this.panel2.Size = new System.Drawing.Size(1641, 84);
             this.panel2.TabIndex = 2;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // label3
             // 
@@ -145,40 +161,35 @@
             this.label3.Size = new System.Drawing.Size(400, 25);
             this.label3.TabIndex = 2;
             this.label3.Text = "All Rights Reserved © G5 Software Solutions";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // tabControl1
+            // tab_Store
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 133);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1618, 698);
-            this.tabControl1.TabIndex = 3;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.tab_Store.Controls.Add(this.tab_invetory);
+            this.tab_Store.Controls.Add(this.tab_purchase);
+            this.tab_Store.Controls.Add(this.tab_rental);
+            this.tab_Store.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tab_Store.Location = new System.Drawing.Point(0, 133);
+            this.tab_Store.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tab_Store.Name = "tab_Store";
+            this.tab_Store.SelectedIndex = 0;
+            this.tab_Store.Size = new System.Drawing.Size(1641, 698);
+            this.tab_Store.TabIndex = 3;
             // 
-            // tabPage1
+            // tab_invetory
             // 
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(1610, 665);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Inventory";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            this.tab_invetory.Controls.Add(this.groupBox1);
+            this.tab_invetory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tab_invetory.Location = new System.Drawing.Point(4, 29);
+            this.tab_invetory.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tab_invetory.Name = "tab_invetory";
+            this.tab_invetory.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tab_invetory.Size = new System.Drawing.Size(1633, 665);
+            this.tab_invetory.TabIndex = 0;
+            this.tab_invetory.Text = "Inventory";
+            this.tab_invetory.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btn_printTable);
-            this.groupBox1.Controls.Add(this.btn_update);
             this.groupBox1.Controls.Add(this.lb_totalProfits);
             this.groupBox1.Controls.Add(this.lb_TotalUnit);
             this.groupBox1.Controls.Add(this.lb_totalItem);
@@ -190,31 +201,20 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(33, 26);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(4, 5);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(1573, 756);
+            this.groupBox1.Size = new System.Drawing.Size(1625, 655);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Inventory Info";
             // 
-            // btn_update
-            // 
-            this.btn_update.ImageIndex = 5;
-            this.btn_update.ImageList = this.imageList1;
-            this.btn_update.Location = new System.Drawing.Point(164, 292);
-            this.btn_update.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btn_update.Name = "btn_update";
-            this.btn_update.Size = new System.Drawing.Size(116, 70);
-            this.btn_update.TabIndex = 13;
-            this.btn_update.UseVisualStyleBackColor = true;
-            this.btn_update.Click += new System.EventHandler(this.btn_update_Click_1);
-            // 
             // lb_totalProfits
             // 
             this.lb_totalProfits.AutoSize = true;
-            this.lb_totalProfits.Location = new System.Drawing.Point(478, 210);
+            this.lb_totalProfits.Location = new System.Drawing.Point(196, 358);
             this.lb_totalProfits.Name = "lb_totalProfits";
             this.lb_totalProfits.Size = new System.Drawing.Size(62, 20);
             this.lb_totalProfits.TabIndex = 12;
@@ -223,7 +223,7 @@
             // lb_TotalUnit
             // 
             this.lb_TotalUnit.AutoSize = true;
-            this.lb_TotalUnit.Location = new System.Drawing.Point(575, 176);
+            this.lb_TotalUnit.Location = new System.Drawing.Point(293, 311);
             this.lb_TotalUnit.Name = "lb_TotalUnit";
             this.lb_TotalUnit.Size = new System.Drawing.Size(62, 20);
             this.lb_TotalUnit.TabIndex = 11;
@@ -232,7 +232,7 @@
             // lb_totalItem
             // 
             this.lb_totalItem.AutoSize = true;
-            this.lb_totalItem.Location = new System.Drawing.Point(478, 142);
+            this.lb_totalItem.Location = new System.Drawing.Point(196, 259);
             this.lb_totalItem.Name = "lb_totalItem";
             this.lb_totalItem.Size = new System.Drawing.Size(62, 20);
             this.lb_totalItem.TabIndex = 10;
@@ -241,7 +241,7 @@
             // lb_storeID
             // 
             this.lb_storeID.AutoSize = true;
-            this.lb_storeID.Location = new System.Drawing.Point(478, 111);
+            this.lb_storeID.Location = new System.Drawing.Point(196, 205);
             this.lb_storeID.Name = "lb_storeID";
             this.lb_storeID.Size = new System.Drawing.Size(62, 20);
             this.lb_storeID.TabIndex = 9;
@@ -249,42 +249,44 @@
             // 
             // dataGridView_StoreInfo
             // 
+            this.dataGridView_StoreInfo.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView_StoreInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_StoreInfo.Location = new System.Drawing.Point(334, 264);
+            this.dataGridView_StoreInfo.Location = new System.Drawing.Point(776, 97);
             this.dataGridView_StoreInfo.Name = "dataGridView_StoreInfo";
             this.dataGridView_StoreInfo.RowTemplate.Height = 28;
-            this.dataGridView_StoreInfo.Size = new System.Drawing.Size(1162, 413);
+            this.dataGridView_StoreInfo.Size = new System.Drawing.Size(881, 561);
             this.dataGridView_StoreInfo.TabIndex = 8;
-            this.dataGridView_StoreInfo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_StoreInfo_CellContentClick);
-            this.dataGridView_StoreInfo.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_StoreInfo_CellValueChanged);
             // 
             // btn_showInfo
             // 
-            this.btn_showInfo.Location = new System.Drawing.Point(735, 68);
+            this.btn_showInfo.BackColor = System.Drawing.Color.LimeGreen;
+            this.btn_showInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_showInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_showInfo.ForeColor = System.Drawing.Color.White;
+            this.btn_showInfo.Location = new System.Drawing.Point(453, 127);
             this.btn_showInfo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_showInfo.Name = "btn_showInfo";
             this.btn_showInfo.Size = new System.Drawing.Size(154, 35);
-            this.btn_showInfo.TabIndex = 7;
+            this.btn_showInfo.TabIndex = 2;
             this.btn_showInfo.Text = "Show Info";
-            this.btn_showInfo.UseVisualStyleBackColor = true;
+            this.btn_showInfo.UseVisualStyleBackColor = false;
             this.btn_showInfo.Click += new System.EventHandler(this.btn_showInfo_Click);
             // 
             // cb_listStore
             // 
             this.cb_listStore.FormattingEnabled = true;
-            this.cb_listStore.Location = new System.Drawing.Point(345, 71);
+            this.cb_listStore.Location = new System.Drawing.Point(63, 130);
             this.cb_listStore.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cb_listStore.Name = "cb_listStore";
             this.cb_listStore.Size = new System.Drawing.Size(379, 28);
-            this.cb_listStore.TabIndex = 6;
+            this.cb_listStore.TabIndex = 1;
             this.cb_listStore.Text = "Choose a store";
-            this.cb_listStore.SelectedIndexChanged += new System.EventHandler(this.cb_listStore_SelectedIndexChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(341, 210);
+            this.label9.Location = new System.Drawing.Point(59, 358);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(119, 20);
@@ -295,7 +297,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(341, 176);
+            this.label8.Location = new System.Drawing.Point(59, 311);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(217, 20);
@@ -306,7 +308,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(341, 142);
+            this.label7.Location = new System.Drawing.Point(59, 259);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(109, 20);
@@ -317,28 +319,29 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(341, 111);
+            this.label6.Location = new System.Drawing.Point(59, 205);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 20);
             this.label6.TabIndex = 1;
             this.label6.Text = "Store ID:";
             // 
-            // tabPage2
+            // tab_purchase
             // 
-            this.tabPage2.Controls.Add(this.gp_menuCart);
-            this.tabPage2.Controls.Add(this.groupBox4);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(1610, 665);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Sale Store";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tab_purchase.Controls.Add(this.gp_menuCart);
+            this.tab_purchase.Controls.Add(this.groupBox4);
+            this.tab_purchase.Location = new System.Drawing.Point(4, 29);
+            this.tab_purchase.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tab_purchase.Name = "tab_purchase";
+            this.tab_purchase.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tab_purchase.Size = new System.Drawing.Size(1633, 665);
+            this.tab_purchase.TabIndex = 1;
+            this.tab_purchase.Text = "Sale Store";
+            this.tab_purchase.UseVisualStyleBackColor = true;
             // 
             // gp_menuCart
             // 
+            this.gp_menuCart.Controls.Add(this.lb_rfidReader);
             this.gp_menuCart.Controls.Add(this.layout_item);
             this.gp_menuCart.Controls.Add(this.btn_snacks);
             this.gp_menuCart.Controls.Add(this.btn_sweets);
@@ -353,6 +356,15 @@
             this.gp_menuCart.TabIndex = 26;
             this.gp_menuCart.TabStop = false;
             this.gp_menuCart.Text = "Menucart";
+            // 
+            // lb_rfidReader
+            // 
+            this.lb_rfidReader.AutoSize = true;
+            this.lb_rfidReader.Location = new System.Drawing.Point(7, 630);
+            this.lb_rfidReader.Name = "lb_rfidReader";
+            this.lb_rfidReader.Size = new System.Drawing.Size(60, 20);
+            this.lb_rfidReader.TabIndex = 33;
+            this.lb_rfidReader.Text = "label10";
             // 
             // layout_item
             // 
@@ -414,7 +426,6 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.btn_printBil);
             this.groupBox4.Controls.Add(this.lb_total);
             this.groupBox4.Controls.Add(this.label14);
             this.groupBox4.Controls.Add(this.dt_cart);
@@ -422,7 +433,7 @@
             this.groupBox4.Controls.Add(this.button3);
             this.groupBox4.Controls.Add(this.groupBox2);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox4.Location = new System.Drawing.Point(970, 5);
+            this.groupBox4.Location = new System.Drawing.Point(993, 5);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -430,17 +441,6 @@
             this.groupBox4.TabIndex = 14;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Shopping Cart";
-            // 
-            // btn_printBil
-            // 
-            this.btn_printBil.Location = new System.Drawing.Point(466, 620);
-            this.btn_printBil.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btn_printBil.Name = "btn_printBil";
-            this.btn_printBil.Size = new System.Drawing.Size(143, 36);
-            this.btn_printBil.TabIndex = 30;
-            this.btn_printBil.Text = "Print bill";
-            this.btn_printBil.UseVisualStyleBackColor = true;
-            this.btn_printBil.Click += new System.EventHandler(this.btn_printBil_Click);
             // 
             // lb_total
             // 
@@ -462,23 +462,27 @@
             // 
             // dt_cart
             // 
+            this.dt_cart.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dt_cart.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dt_cart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dt_cart.Location = new System.Drawing.Point(102, 155);
             this.dt_cart.Name = "dt_cart";
             this.dt_cart.RowTemplate.Height = 28;
             this.dt_cart.Size = new System.Drawing.Size(507, 370);
             this.dt_cart.TabIndex = 28;
+            this.dt_cart.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_cart_CellContentClick);
             this.dt_cart.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_cart_CellDoubleClick);
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(386, 91);
+            this.button10.Location = new System.Drawing.Point(459, 70);
             this.button10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(112, 35);
             this.button10.TabIndex = 27;
             this.button10.Text = "Clear";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button3
             // 
@@ -493,9 +497,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lb_test);
             this.groupBox2.Controls.Add(this.lb_rfid_purchase);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(132, 81);
+            this.groupBox2.Location = new System.Drawing.Point(132, 52);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -503,6 +508,17 @@
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bracelet Info";
+            // 
+            // lb_test
+            // 
+            this.lb_test.AutoSize = true;
+            this.lb_test.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_test.Location = new System.Drawing.Point(105, 60);
+            this.lb_test.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lb_test.Name = "lb_test";
+            this.lb_test.Size = new System.Drawing.Size(41, 20);
+            this.lb_test.TabIndex = 10;
+            this.lb_test.Text = "test";
             // 
             // lb_rfid_purchase
             // 
@@ -526,17 +542,17 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "RFID:";
             // 
-            // tabPage3
+            // tab_rental
             // 
-            this.tabPage3.Controls.Add(this.groupBox5);
-            this.tabPage3.Controls.Add(this.groupBox3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1610, 665);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Rental Store";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tab_rental.Controls.Add(this.groupBox5);
+            this.tab_rental.Controls.Add(this.groupBox3);
+            this.tab_rental.Location = new System.Drawing.Point(4, 29);
+            this.tab_rental.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tab_rental.Name = "tab_rental";
+            this.tab_rental.Size = new System.Drawing.Size(1633, 665);
+            this.tab_rental.TabIndex = 2;
+            this.tab_rental.Text = "Rental Store";
+            this.tab_rental.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
@@ -549,15 +565,15 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox5.Location = new System.Drawing.Point(0, 0);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(1034, 665);
+            this.groupBox5.Size = new System.Drawing.Size(887, 665);
             this.groupBox5.TabIndex = 25;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "groupBox5";
+            this.groupBox5.Text = "Menu Cart";
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.DarkGray;
-            this.button1.Location = new System.Drawing.Point(645, 86);
+            this.button1.Location = new System.Drawing.Point(510, 86);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(116, 79);
             this.button1.TabIndex = 37;
@@ -570,19 +586,19 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 311F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(66, 274);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 312F));
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(66, 258);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(907, 285);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(744, 301);
             this.tableLayoutPanel1.TabIndex = 36;
             // 
             // btn_charger
             // 
             this.btn_charger.BackColor = System.Drawing.Color.DarkGray;
-            this.btn_charger.Location = new System.Drawing.Point(354, 86);
+            this.btn_charger.Location = new System.Drawing.Point(219, 86);
             this.btn_charger.Name = "btn_charger";
             this.btn_charger.Size = new System.Drawing.Size(117, 79);
             this.btn_charger.TabIndex = 35;
@@ -593,7 +609,7 @@
             // btn_powerBank
             // 
             this.btn_powerBank.BackColor = System.Drawing.Color.DarkGray;
-            this.btn_powerBank.Location = new System.Drawing.Point(501, 86);
+            this.btn_powerBank.Location = new System.Drawing.Point(366, 86);
             this.btn_powerBank.Name = "btn_powerBank";
             this.btn_powerBank.Size = new System.Drawing.Size(114, 79);
             this.btn_powerBank.TabIndex = 34;
@@ -604,7 +620,7 @@
             // btn_otherItems
             // 
             this.btn_otherItems.BackColor = System.Drawing.Color.DarkGray;
-            this.btn_otherItems.Location = new System.Drawing.Point(783, 86);
+            this.btn_otherItems.Location = new System.Drawing.Point(648, 86);
             this.btn_otherItems.Name = "btn_otherItems";
             this.btn_otherItems.Size = new System.Drawing.Size(116, 79);
             this.btn_otherItems.TabIndex = 33;
@@ -615,7 +631,7 @@
             // btn_camera
             // 
             this.btn_camera.BackColor = System.Drawing.Color.DarkGray;
-            this.btn_camera.Location = new System.Drawing.Point(201, 86);
+            this.btn_camera.Location = new System.Drawing.Point(66, 86);
             this.btn_camera.Name = "btn_camera";
             this.btn_camera.Size = new System.Drawing.Size(124, 79);
             this.btn_camera.TabIndex = 32;
@@ -625,39 +641,28 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.btn_print);
-            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.lb_rentTotal);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.dt_rental);
             this.groupBox3.Controls.Add(this.groupBox7);
-            this.groupBox3.Controls.Add(this.button2);
+            this.groupBox3.Controls.Add(this.btn_payRental);
             this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox3.Location = new System.Drawing.Point(1069, 0);
+            this.groupBox3.Location = new System.Drawing.Point(916, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(541, 665);
+            this.groupBox3.Size = new System.Drawing.Size(717, 665);
             this.groupBox3.TabIndex = 24;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
+            this.groupBox3.Text = "Shopping Cart";
             // 
-            // btn_print
+            // lb_rentTotal
             // 
-            this.btn_print.Location = new System.Drawing.Point(304, 604);
-            this.btn_print.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btn_print.Name = "btn_print";
-            this.btn_print.Size = new System.Drawing.Size(241, 35);
-            this.btn_print.TabIndex = 32;
-            this.btn_print.Text = "Print receipt";
-            this.btn_print.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(447, 555);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 20);
-            this.label2.TabIndex = 31;
-            this.label2.Text = "label15";
+            this.lb_rentTotal.AutoSize = true;
+            this.lb_rentTotal.Location = new System.Drawing.Point(447, 555);
+            this.lb_rentTotal.Name = "lb_rentTotal";
+            this.lb_rentTotal.Size = new System.Drawing.Size(60, 20);
+            this.lb_rentTotal.TabIndex = 31;
+            this.lb_rentTotal.Text = "label15";
             // 
             // label5
             // 
@@ -670,24 +675,89 @@
             // 
             // dt_rental
             // 
+            this.dt_rental.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dt_rental.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dt_rental.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dt_rental.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dt_rental.Location = new System.Drawing.Point(26, 216);
+            this.dt_rental.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Item,
+            this.Quantity,
+            this.Deposit,
+            this.Price,
+            this.Renttime,
+            this.Return});
+            this.dt_rental.Location = new System.Drawing.Point(26, 211);
             this.dt_rental.Name = "dt_rental";
             this.dt_rental.RowTemplate.Height = 28;
-            this.dt_rental.Size = new System.Drawing.Size(507, 309);
-            this.dt_rental.TabIndex = 29;
+            this.dt_rental.Size = new System.Drawing.Size(683, 309);
+            this.dt_rental.TabIndex = 0;
+            this.dt_rental.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_rental_CellDoubleClick);
+            // 
+            // Item
+            // 
+            this.Item.HeaderText = "Item";
+            this.Item.Name = "Item";
+            // 
+            // Quantity
+            // 
+            this.Quantity.HeaderText = "Quan";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Quantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Quantity.Width = 50;
+            // 
+            // Deposit
+            // 
+            this.Deposit.HeaderText = "Dep";
+            this.Deposit.Name = "Deposit";
+            this.Deposit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Deposit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Deposit.Width = 50;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Price.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Price.Width = 50;
+            // 
+            // Renttime
+            // 
+            this.Renttime.HeaderText = "Rent time";
+            this.Renttime.Name = "Renttime";
+            this.Renttime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Renttime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Return
+            // 
+            this.Return.HeaderText = "Return time";
+            this.Return.Name = "Return";
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.lb_nameRent);
+            this.groupBox7.Controls.Add(this.lb_rfidRental);
             this.groupBox7.Controls.Add(this.label36);
             this.groupBox7.Location = new System.Drawing.Point(38, 86);
             this.groupBox7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox7.Size = new System.Drawing.Size(259, 67);
+            this.groupBox7.Size = new System.Drawing.Size(313, 96);
             this.groupBox7.TabIndex = 21;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Bracelet Info";
+            // 
+            // lb_rfidRental
+            // 
+            this.lb_rfidRental.AutoSize = true;
+            this.lb_rfidRental.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rfidRental.Location = new System.Drawing.Point(121, 42);
+            this.lb_rfidRental.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lb_rfidRental.Name = "lb_rfidRental";
+            this.lb_rfidRental.Size = new System.Drawing.Size(58, 20);
+            this.lb_rfidRental.TabIndex = 9;
+            this.lb_rfidRental.Text = "RFID:";
             // 
             // label36
             // 
@@ -700,25 +770,37 @@
             this.label36.TabIndex = 8;
             this.label36.Text = "RFID:";
             // 
-            // button2
+            // btn_payRental
             // 
-            this.button2.Location = new System.Drawing.Point(26, 604);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(241, 35);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "Proceed to payment";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_payRental.Location = new System.Drawing.Point(26, 604);
+            this.btn_payRental.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btn_payRental.Name = "btn_payRental";
+            this.btn_payRental.Size = new System.Drawing.Size(241, 35);
+            this.btn_payRental.TabIndex = 17;
+            this.btn_payRental.Text = "Proceed to payment";
+            this.btn_payRental.UseVisualStyleBackColor = true;
+            this.btn_payRental.Click += new System.EventHandler(this.btn_payRental_Click);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(346, 57);
+            this.button4.Location = new System.Drawing.Point(395, 108);
             this.button4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(112, 35);
             this.button4.TabIndex = 23;
             this.button4.Text = "Clear";
             this.button4.UseVisualStyleBackColor = true;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "bitmap.ico");
+            this.imageList1.Images.SetKeyName(1, "print.ico");
+            this.imageList1.Images.SetKeyName(2, "Search.ico");
+            this.imageList1.Images.SetKeyName(3, "statistics.ico");
+            this.imageList1.Images.SetKeyName(4, "visitors.ico");
+            this.imageList1.Images.SetKeyName(5, "trashbin.ico");
             // 
             // printDocument1
             // 
@@ -735,35 +817,28 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
-            // imageList1
+            // timer1
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "bitmap.ico");
-            this.imageList1.Images.SetKeyName(1, "print.ico");
-            this.imageList1.Images.SetKeyName(2, "Search.ico");
-            this.imageList1.Images.SetKeyName(3, "statistics.ico");
-            this.imageList1.Images.SetKeyName(4, "visitors.ico");
-            this.imageList1.Images.SetKeyName(5, "trashbin.ico");
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btn_printTable
+            // lb_nameRent
             // 
-            this.btn_printTable.ImageIndex = 1;
-            this.btn_printTable.ImageList = this.imageList1;
-            this.btn_printTable.Location = new System.Drawing.Point(164, 388);
-            this.btn_printTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btn_printTable.Name = "btn_printTable";
-            this.btn_printTable.Size = new System.Drawing.Size(116, 70);
-            this.btn_printTable.TabIndex = 14;
-            this.btn_printTable.UseVisualStyleBackColor = true;
-            this.btn_printTable.Click += new System.EventHandler(this.btn_printTable_Click);
+            this.lb_nameRent.AutoSize = true;
+            this.lb_nameRent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_nameRent.Location = new System.Drawing.Point(121, 71);
+            this.lb_nameRent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lb_nameRent.Name = "lb_nameRent";
+            this.lb_nameRent.Size = new System.Drawing.Size(58, 20);
+            this.lb_nameRent.TabIndex = 10;
+            this.lb_nameRent.Text = "RFID:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1618, 915);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(1641, 915);
+            this.Controls.Add(this.tab_Store);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -773,19 +848,20 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tab_Store.ResumeLayout(false);
+            this.tab_invetory.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_StoreInfo)).EndInit();
-            this.tabPage2.ResumeLayout(false);
+            this.tab_purchase.ResumeLayout(false);
             this.gp_menuCart.ResumeLayout(false);
+            this.gp_menuCart.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dt_cart)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
+            this.tab_rental.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -802,16 +878,16 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl tab_Store;
+        private System.Windows.Forms.TabPage tab_invetory;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tab_purchase;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tab_rental;
         private System.Windows.Forms.Button btn_showInfo;
         private System.Windows.Forms.ComboBox cb_listStore;
         private System.Windows.Forms.Label label9;
@@ -819,7 +895,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_payRental;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.GroupBox gp_menuCart;
@@ -843,18 +919,26 @@
         private System.Windows.Forms.Button btn_otherItems;
         private System.Windows.Forms.Button btn_camera;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lb_rentTotal;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dt_rental;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btn_print;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
-        private System.Windows.Forms.Button btn_printBil;
-        private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Label lb_rfid_purchase;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.Button btn_printTable;
+        private System.Windows.Forms.Label lb_rfidReader;
+        private System.Windows.Forms.Label lb_rfidRental;
+        private System.Windows.Forms.Label lb_DateTime2;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lb_test;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Item;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Deposit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Renttime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Return;
+        private System.Windows.Forms.Label lb_nameRent;
     }
 }
 
