@@ -572,28 +572,28 @@ namespace Event_Overview_Application
             return list;
         }
         ////3-12
-       // Get total profit
+        // Get total profit
         public decimal GetProfitByStoreId(int id)
         {
             decimal profit = 0;
-            string sql = string.Format("SELECT IFNULL(deposit_price,0) FROM item WHERE store_id ={0}", id);
-            MySqlCommand command;
-            command= new MySqlCommand(sql, connection);
+            //  string sql = string.Format("SELECT IFNULL(deposit_price,0) FROM item WHERE store_id ={0}", id);
+            // MySqlCommand command;
+            // command= new MySqlCommand(sql, connection);
             try
             {
                 connection.Open();
-                decimal deposit = Convert.ToDecimal(command.ExecuteScalar());
-                if (deposit == 0)
+                //  decimal deposit = Convert.ToDecimal(command.ExecuteScalar());
+                if (id == 3) // rental store
                 { //purchase items
                     string sql1 = string.Format("SELECT IFNULL( sum(p.purchase_quantity * i.item_price),0) from item i join purchase p on i.item_id =p.item_id where i.store_id ={0}",id);
-                    command = new MySqlCommand(sql1, connection);
+                   MySqlCommand command = new MySqlCommand(sql1, connection);
                     profit =Convert.ToDecimal( command.ExecuteScalar());
 
                 }
                 else//rental items
                 {
                     string sql2 = string.Format("SELECT IFNULL(sum(i.item_price),0) FROM item i join rental r on i.item_id = r.item_id where i.store_id={0}",id);
-                    command = new MySqlCommand(sql2, connection);
+                   MySqlCommand command = new MySqlCommand(sql2, connection);
                     profit = Convert.ToDecimal(command.ExecuteScalar());
                 }
             }

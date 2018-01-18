@@ -25,12 +25,6 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lb_spot = new System.Windows.Forms.Label();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
@@ -38,8 +32,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.pn_visitorStatistic = new System.Windows.Forms.Panel();
-            this.chart_spentMoney = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart_shops = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.picture_totalAtEvent = new System.Windows.Forms.PictureBox();
             this.lb_totalvisitorsatEvent = new System.Windows.Forms.Label();
             this.lb_textTotalAtEvent = new System.Windows.Forms.Label();
@@ -110,8 +102,6 @@
             this.tab_visitorOverview = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tab_statistics = new System.Windows.Forms.TabPage();
-            this.btn_exportToExcel = new System.Windows.Forms.Button();
-            this.btn_png = new System.Windows.Forms.Button();
             this.panel_numbers = new System.Windows.Forms.Panel();
             this.pn_shopStatistics = new System.Windows.Forms.Panel();
             this.lb_textCheckedIn = new System.Windows.Forms.Label();
@@ -135,8 +125,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.pn_visitorStatistic.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart_spentMoney)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart_shops)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picture_totalAtEvent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picture_totalVisitor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picture_totalBalance)).BeginInit();
@@ -232,8 +220,6 @@
             // 
             // pn_visitorStatistic
             // 
-            this.pn_visitorStatistic.Controls.Add(this.chart_spentMoney);
-            this.pn_visitorStatistic.Controls.Add(this.chart_shops);
             this.pn_visitorStatistic.Controls.Add(this.picture_totalAtEvent);
             this.pn_visitorStatistic.Controls.Add(this.lb_totalvisitorsatEvent);
             this.pn_visitorStatistic.Controls.Add(this.lb_textTotalAtEvent);
@@ -247,38 +233,6 @@
             this.pn_visitorStatistic.Name = "pn_visitorStatistic";
             this.pn_visitorStatistic.Size = new System.Drawing.Size(1493, 411);
             this.pn_visitorStatistic.TabIndex = 9;
-            // 
-            // chart_spentMoney
-            // 
-            chartArea3.Name = "ChartArea1";
-            this.chart_spentMoney.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart_spentMoney.Legends.Add(legend3);
-            this.chart_spentMoney.Location = new System.Drawing.Point(789, 45);
-            this.chart_spentMoney.Name = "chart_spentMoney";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart_spentMoney.Series.Add(series3);
-            this.chart_spentMoney.Size = new System.Drawing.Size(514, 335);
-            this.chart_spentMoney.TabIndex = 24;
-            this.chart_spentMoney.Text = "chart1";
-            // 
-            // chart_shops
-            // 
-            chartArea4.Name = "ChartArea1";
-            this.chart_shops.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart_shops.Legends.Add(legend4);
-            this.chart_shops.Location = new System.Drawing.Point(210, 45);
-            this.chart_shops.Name = "chart_shops";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Profit";
-            this.chart_shops.Series.Add(series4);
-            this.chart_shops.Size = new System.Drawing.Size(541, 335);
-            this.chart_shops.TabIndex = 0;
-            this.chart_shops.Text = "chart1";
             // 
             // picture_totalAtEvent
             // 
@@ -1093,8 +1047,6 @@
             // 
             // tab_statistics
             // 
-            this.tab_statistics.Controls.Add(this.btn_exportToExcel);
-            this.tab_statistics.Controls.Add(this.btn_png);
             this.tab_statistics.Controls.Add(this.panel_numbers);
             this.tab_statistics.Controls.Add(this.pn_chartStatistics);
             this.tab_statistics.Location = new System.Drawing.Point(4, 29);
@@ -1103,28 +1055,6 @@
             this.tab_statistics.TabIndex = 3;
             this.tab_statistics.Text = "Statistics";
             this.tab_statistics.UseVisualStyleBackColor = true;
-            // 
-            // btn_exportToExcel
-            // 
-            this.btn_exportToExcel.ImageIndex = 3;
-            this.btn_exportToExcel.ImageList = this.imageList1;
-            this.btn_exportToExcel.Location = new System.Drawing.Point(3, 155);
-            this.btn_exportToExcel.Name = "btn_exportToExcel";
-            this.btn_exportToExcel.Size = new System.Drawing.Size(47, 40);
-            this.btn_exportToExcel.TabIndex = 6;
-            this.btn_exportToExcel.UseVisualStyleBackColor = true;
-            this.btn_exportToExcel.Click += new System.EventHandler(this.btn_exportToExcel_Click_1);
-            // 
-            // btn_png
-            // 
-            this.btn_png.ImageIndex = 2;
-            this.btn_png.ImageList = this.imageList1;
-            this.btn_png.Location = new System.Drawing.Point(3, 113);
-            this.btn_png.Name = "btn_png";
-            this.btn_png.Size = new System.Drawing.Size(47, 36);
-            this.btn_png.TabIndex = 7;
-            this.btn_png.UseVisualStyleBackColor = true;
-            this.btn_png.Click += new System.EventHandler(this.btn_png_Click_1);
             // 
             // panel_numbers
             // 
@@ -1159,9 +1089,9 @@
             this.pn_shopStatistics.Controls.Add(this.lb_bestSelling);
             this.pn_shopStatistics.Controls.Add(this.picture_totalSpentMoney);
             this.pn_shopStatistics.Controls.Add(this.lb_textSpentMoney);
-            this.pn_shopStatistics.Location = new System.Drawing.Point(47, 707);
+            this.pn_shopStatistics.Location = new System.Drawing.Point(47, 327);
             this.pn_shopStatistics.Name = "pn_shopStatistics";
-            this.pn_shopStatistics.Size = new System.Drawing.Size(1479, 47);
+            this.pn_shopStatistics.Size = new System.Drawing.Size(1479, 427);
             this.pn_shopStatistics.TabIndex = 28;
             // 
             // lb_textCheckedIn
@@ -1308,9 +1238,9 @@
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(18, 59);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(101, 34);
+            this.label5.Size = new System.Drawing.Size(216, 34);
             this.label5.TabIndex = 5;
-            this.label5.Text = "Charts";
+            this.label5.Text = "Charts & Reports";
             // 
             // pn_chartStatistics
             // 
@@ -1382,8 +1312,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.pn_visitorStatistic.ResumeLayout(false);
             this.pn_visitorStatistic.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart_spentMoney)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart_shops)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picture_totalAtEvent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picture_totalVisitor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picture_totalBalance)).EndInit();
@@ -1451,7 +1379,6 @@
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart_shops;
         private System.Windows.Forms.PictureBox picture_bestShop;
         private System.Windows.Forms.Label lb_textBestShop;
         private System.Windows.Forms.Panel panel9;
@@ -1505,8 +1432,6 @@
         private System.Windows.Forms.TabPage tab_visitorOverview;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tab_statistics;
-        private System.Windows.Forms.Button btn_exportToExcel;
-        private System.Windows.Forms.Button btn_png;
         private System.Windows.Forms.Panel panel_numbers;
         private System.Windows.Forms.Panel pn_shopStatistics;
         private System.Windows.Forms.Panel pn_chartStatistics;
@@ -1530,7 +1455,6 @@
         private System.Windows.Forms.Label lb_textFreeSpt;
         private System.Windows.Forms.Label lb_freeSpot;
         private System.Windows.Forms.Label lb_textCheckedIn;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart_spentMoney;
     }
 }
 

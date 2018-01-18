@@ -40,3 +40,5 @@ C:\Users\Thao Nguyen\spotify-windows-applications\Event Overview Application\Eve
 C:\Users\Thao Nguyen\spotify-windows-applications\Event Overview Application\Event Overview Application\Event Overview Application\bin\Debug\itextsharp.xml
 C:\Users\Thao Nguyen\spotify-windows-applications\Event Overview Application\Event Overview Application\Event Overview Application\obj\Debug\Event_Overview_Application.Login.resources
 C:\Users\Thao Nguyen\spotify-windows-applications\Event Overview Application\Event Overview Application\Event Overview Application\bin\Debug\Zen.Barcode.Core.dll
+C:\Users\Thao Nguyen\spotify-windows-applications\Event Overview Application\Event Overview Application\Event Overview Application\obj\Debug\Event_Overview_Application.Charts.resources
+C:\Users\Thao Nguyen\spotify-windows-applications\Event Overview Application\Event Overview Application\Event Overview Application\bin\Debug\Resources\logo.png

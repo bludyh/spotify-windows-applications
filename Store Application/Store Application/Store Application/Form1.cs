@@ -448,6 +448,7 @@ namespace Store_Application {
         private void button3_Click(object sender, EventArgs e)
         {
             rfid = lb_rfid_purchase.Text;
+            decimal total = 0;
             decimal balance = dh.GetBalance(lb_rfid_purchase.Text); //But it shows firstname of visitor???
             if (balance > this.totalPrice())//enough balance to purchase
             {
@@ -459,7 +460,9 @@ namespace Store_Application {
                 {
                     int id = dh.IncrementPurchaseId();
                     dh.UpdatePurchaseTable(id,lb_rfid_purchase.Text,i.Item_name,i.Item_quantity,s);
+                    total += (i.Item_quantity * i.Item_price);
                 }
+                dh.UpdateBalanceOfVisitor(rfid,total);
                 MessageBox.Show("Print the bill....", "Success purchasing", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                
@@ -586,7 +589,14 @@ namespace Store_Application {
         private decimal totalPrice() {
             decimal totalPrice = 0;
             foreach (Item i in listItemPurchase) {
-                totalPrice += i.Item_price;
+                totalPrice += (i.Item_price*i.Item_quantity);
+            }
+            return totalPrice;
+        }
+        private decimal totalRentPrice() {
+            decimal totalPrice = 0;
+            foreach (RentalItem i in listItemRent) {
+                totalPrice += (i.Item_price * i.Deposit)*i.Item_quantity;
             }
             return totalPrice;
         }
@@ -694,8 +704,9 @@ namespace Store_Application {
 
         private void btn_payRental_Click(object sender, EventArgs e)
         {
+            decimal total = 0;
             decimal balance = dh.GetBalance(lb_rfidRental.Text); //But it shows firstname of visitor???
-            if (balance > this.totalPrice())//enough balance to purchase
+            if (balance > this.totalRentPrice())//enough balance to purchase
             {
 
                 int visitor_id = dh.GetVisitorIdByRFID(lb_rfidRental.Text);
@@ -705,8 +716,10 @@ namespace Store_Application {
                 {
                     int id = dh.IncrementPurchaseId();
                     dh.UpdateRentalTable(lb_rfidRental.Text,i.Item_name,s);
+                    total += (i.Item_price + i.Deposit)*i.Item_quantity;
                     
                 }
+                dh.UpdateBalanceOfVisitor(lb_rfidRental.Text, total);
                 MessageBox.Show("Print the bill....", "Success purchasing", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //Print the bill

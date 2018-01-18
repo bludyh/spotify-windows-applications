@@ -10,11 +10,13 @@ using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using GemBox.Spreadsheet.Charts;
 using iTextSharp;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
+
 using System.IO;
 using System.Windows.Forms.DataVisualization.Charting;
 using Zen.Barcode;
+using iTextSharp.text;//creating pdf
+using iTextSharp.text.pdf;
+
 
 namespace Event_Overview_Application {
     public partial class Form1 : Form
@@ -35,7 +37,6 @@ namespace Event_Overview_Application {
             //When user click on visitor or shop radiobuttons, this will be enable again
             txt_Names.Enabled = btn_search.Enabled =btn_clearDT.Enabled=btn_clear.Enabled= false;
 
-            btn_exportToExcel.Enabled = btn_png.Enabled = false;
             pn_visitorStatistic.Visible = pn_shopStatistics.Visible = pn_chartStatistics.Visible = false;
 
             BindNames();
@@ -955,27 +956,7 @@ namespace Event_Overview_Application {
             int id;
             /*Get the data for the charts*/
             //The profits chart
-            id = dh.getStoreIdByName("NIKE");
-            this.chart_shops.Series["Profit"].Points.AddXY("NIKE", dh.GetProfitByStoreId(id));
-            id = dh.getStoreIdByName("ELECTRONICS");
-            this.chart_shops.Series["Profit"].Points.AddXY("ELECTRONICS", dh.GetProfitByStoreId(id));
-            id = dh.getStoreIdByName("TONYS WOK");
-            this.chart_shops.Series["Profit"].Points.AddXY("TONY'S WOK", dh.GetProfitByStoreId(id));
-            //the pie chart
-            //    this.piechart.Series["Profit1"].Points.AddXY(dh.TheBestShop().Name, dh.GetProfitByStoreId(dh.TheBestShop().Id));
-            //  this.piechart.Series["Profit1"].Points.AddXY("Total Profit", dh.TotalProfit());
-            chart_spentMoney = new Chart();
-            chart_spentMoney.Series.Add("Total Profit Per day of Shops");
-            start = "2018-01-09 00:00:00";
-            end = "2018-01-09 23:59:59";
-            chart_spentMoney.Series["Total Profit Per day of Shops"].Points.AddXY("DAY 1", dh.GetTotalMoneySpent(start, end));
-            start = "2018-01-10 00:00:00";
-            end = "2018-01-10 23:59:59";
-            chart_spentMoney.Series["Total Profit Per day of Shops"].Points.AddXY("DAY 2", dh.GetTotalMoneySpent(start, end));
-            start = "2018-01-11 00:00:00";
-            end = "2018-01-11 23:59:59";
-            chart_spentMoney.Series["Total Profit Per day of Shops"].Points.AddXY("DAY 3", dh.GetTotalMoneySpent(start, end));
-
+          
         }
 
         private void panel10_Paint_1(object sender, PaintEventArgs e)
@@ -1000,7 +981,7 @@ namespace Event_Overview_Application {
             pn_visitorStatistic.Visible = true;
 
             pn_shopStatistics.Visible = pn_chartStatistics.Visible = false;
-            pn_chartStatistics.Visible = lb_textBookedSpot.Visible = picture_bookedSpot.Visible = lb_bookedspot.Visible = picture_checkedIn.Visible = lb_textFreeSpt.Visible = picture_freeSpot.Visible = lb_freeSpot.Visible = chart_shops.Visible = chart_spentMoney.Visible= false;// piechart.Visible = false;
+            pn_chartStatistics.Visible = lb_textBookedSpot.Visible = picture_bookedSpot.Visible = lb_bookedspot.Visible = picture_checkedIn.Visible = lb_textFreeSpt.Visible = picture_freeSpot.Visible = lb_freeSpot.Visible =  false;// piechart.Visible = false;
             lb_textTotalVisitors.Visible = picture_totalVisitor.Visible = lb_totalVisitor.Visible = lb_textTotalVisitors.Visible = picture_totalBalance.Visible = lb_textTotalAtEvent.Visible = picture_totalAtEvent.Visible = lb_totalvisitorsatEvent.Visible =lb_textTotalBalance.Visible=picture_totalBalance.Visible=lb_totalBalancee.Visible= true;
             lb_totalVisitor.Text = dh.getTotalVisitors().ToString();
             lb_totalBalancee.Text = dh.GetTotalBalance().ToString();
@@ -1011,7 +992,7 @@ namespace Event_Overview_Application {
         {
             pn_shopStatistics.Visible = true;
 
-            pn_chartStatistics.Visible = pn_visitorStatistic.Visible = lb_textBookedSpot.Visible = picture_bookedSpot.Visible = lb_bookedspot.Visible = picture_checkedIn.Visible = lb_textFreeSpt.Visible = picture_freeSpot.Visible = lb_freeSpot.Visible = lb_VisitorsChecedIn.Visible = lb_textCheckedIn.Visible = lb_textCheckedIn.Visible = chart_shops.Visible = false;//piechart.Visible= false;
+            pn_chartStatistics.Visible = pn_visitorStatistic.Visible = lb_textBookedSpot.Visible = picture_bookedSpot.Visible = lb_bookedspot.Visible = picture_checkedIn.Visible = lb_textFreeSpt.Visible = picture_freeSpot.Visible = lb_freeSpot.Visible = lb_VisitorsChecedIn.Visible = lb_textCheckedIn.Visible = lb_textCheckedIn.Visible = false;//piechart.Visible= false;
             lb_textBestShop.Visible = picture_bestShop.Visible = lb_BestShop.Visible = lb_textBestSelling.Visible = picture_bestSelling.Visible = lb_bestSelling.Visible = lb_textSpentMoney.Visible = picture_totalSpentMoney.Visible = lb_spentMoney.Visible =lb_totalVisitor.Visible=lb_textTotalVisitors.Visible= true;
             //The best shop
             lb_BestShop.Text = dh.TheBestShop().Name;
@@ -1030,50 +1011,23 @@ namespace Event_Overview_Application {
 
             pn_chartStatistics.Visible = pn_visitorStatistic.Visible = false;
 
-            btn_exportToExcel.Enabled = false;
-            btn_png.Enabled = false;
             lb_bookedspot.Text = dh.TotalBookedSpots().ToString();
             lb_freeSpot.Text = dh.TotalFreeSpots().ToString();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string start = "";
-            string end = "";
+           
             pn_visitorStatistic.Visible = true;
 
             pn_shopStatistics.Visible =  false;
-            btn_exportToExcel.Enabled = true;
             pn_chartStatistics.Visible = lb_textBookedSpot.Visible = picture_bookedSpot.Visible = lb_bookedspot.Visible = picture_checkedIn.Visible = lb_textFreeSpt.Visible = picture_freeSpot.Visible = lb_freeSpot.Visible =  false;
             lb_textTotalVisitors.Visible = picture_totalVisitor.Visible = lb_totalVisitor.Visible = lb_textTotalVisitors.Visible = picture_totalBalance.Visible = lb_textTotalAtEvent.Visible = picture_totalAtEvent.Visible = lb_totalvisitorsatEvent.Visible = lb_textTotalBalance.Visible=picture_totalBalance.Visible=lb_totalBalancee.Visible= false;
-            chart_shops.Visible=chart_spentMoney.Visible = true;
+            Charts ch = new Charts();
+            ch.Show();
             lb_totalVisitor.Text = dh.getTotalVisitors().ToString();
 
-            int id;
-            chart_spentMoney.Visible = true;
-            /*Get the data for the charts*/
-            //The profits chart
-            chart_shops = new Chart();
-            chart_shops.Series.Add("Profit");
-            id = dh.getStoreIdByName("NIKE");
-            chart_shops.Series["Profit"].Points.AddXY("NIKE", dh.GetProfitByStoreId(id));
-            id = dh.getStoreIdByName("ELECTRONICS");
-            chart_shops.Series["Profit"].Points.AddXY("ELECTRONICS", dh.GetProfitByStoreId(id));
-            id = dh.getStoreIdByName("TONYS WOK");
-            chart_shops.Series["Profit"].Points.AddXY("TONY'S WOK", dh.GetProfitByStoreId(id));
-            //the pie chart
-            chart_spentMoney = new Chart();
-            chart_spentMoney.Series.Add("Total Profit Per day of Shops");
-             start = "2018-01-09 00:00:00";
-            end = "2018-01-09 23:59:59";
-            chart_spentMoney.Series["Total Profit Per day of Shops"].Points.AddXY("DAY 1",50 /*dh.GetTotalMoneySpent(start,end)*/);
-            start = "2018-01-10 00:00:00";
-            end = "2018-01-10 23:59:59";
-            chart_spentMoney.Series["Total Profit Per day of Shops"].Points.AddXY("DAY 2",100 /*dh.GetTotalMoneySpent(start, end)*/);
-            start = "2018-01-11 00:00:00";
-            end = "2018-01-11 23:59:59";
-            chart_spentMoney.Series["Total Profit Per day of Shops"].Points.AddXY("DAY 3",150 /*dh.GetTotalMoneySpent(start, end)*/);
-
+           
 
         }
 
@@ -1221,60 +1175,15 @@ namespace Event_Overview_Application {
 
         private void btn_exportToExcel_Click_1(object sender, EventArgs e)
         {
-            Excel.Application xlApp;
-            Excel.Workbook xlWorkBook;
-            Excel.Worksheet xlWorkSheet;
-            object misValue = System.Reflection.Missing.Value;
-
-            xlApp = new Excel.Application();
-            xlWorkBook = xlApp.Workbooks.Add(misValue);
-            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-
-            //add data 
-            // xlWorkSheet.Cells[1, 1] = "";
-            xlWorkSheet.Cells[1, 2] = "Profit";
-
-            int id;
-            id = dh.getStoreIdByName("NIKE");
-            xlWorkSheet.Cells[2, 1] = "NIKE";
-            xlWorkSheet.Cells[2, 2] = dh.GetProfitByStoreId(id).ToString();
-
-            id = dh.getStoreIdByName("ELECTRONICS");
-            xlWorkSheet.Cells[3, 1] = "ELECTRONICS";
-            xlWorkSheet.Cells[3, 2] = dh.GetProfitByStoreId(id).ToString();
-
-            id = dh.getStoreIdByName("TONYS WOK");
-            xlWorkSheet.Cells[4, 1] = "TONYS WOK";
-            xlWorkSheet.Cells[4, 2] = dh.GetProfitByStoreId(id).ToString();
-
-            Excel.Range chartRange;
-
-            Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlWorkSheet.ChartObjects(Type.Missing);
-            Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(10, 80, 300, 250);
-            Excel.Chart chartPage = myChart.Chart;
-
-            chartRange = xlWorkSheet.get_Range("A1", "d5");
-            chartPage.SetSourceData(chartRange, misValue);
-            chartPage.ChartType = Excel.XlChartType.xlColumnClustered;
-
-            //export chart as picture file
-            chartPage.Export(@"C:\Users\Thao Nguyen\Desktop\excel_chart_export.bmp", "BMP", misValue);
-
-            xlWorkBook.SaveAs("StatisticsProfit-informations.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-            xlWorkBook.Close(true, misValue, misValue);
-            xlApp.Quit();
-
-            releaseObject(xlWorkSheet);
-            releaseObject(xlWorkBook);
-            releaseObject(xlApp);
-
-            MessageBox.Show("Excel file created , you can find the file c:\\Statistics-Excel.xls");
+          
         }
 
         private void btn_png_Click_1(object sender, EventArgs e)
         {
 
         }
+
+        
     }
 
 }

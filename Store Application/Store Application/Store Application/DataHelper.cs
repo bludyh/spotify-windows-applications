@@ -388,5 +388,16 @@ namespace Store_Application
             finally { connection.Close(); }
             return price;
         }
+        //Update balance of visitor after buying or renting
+        public void UpdateBalanceOfVisitor(string rfid, decimal amount) {
+            string sql = string.Format("Update visitor set balance =(balance-{0}) where rfid='{1}'", amount, rfid);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try {
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (MySqlException ex) { MessageBox.Show(ex.Message); }
+            finally { connection.Close(); }
+        }
     }
 }
