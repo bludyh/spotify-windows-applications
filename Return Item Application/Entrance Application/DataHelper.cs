@@ -298,7 +298,7 @@ namespace Entrance_Application
         /// <returns> List<int> of rental items</string></returns>
         public List<int> GetListOfRentaItem(int id) {
             List<int> list = new List<int>();
-            string sql = string.Format("SELECT item_id FROM rental WHERE visitor_id={0}", id);
+            string sql = string.Format("SELECT item_id FROM rental WHERE visitor_id={0} and return_time is null", id);
             MySqlCommand command = new MySqlCommand(sql, connection);
             try {
                 connection.Open();

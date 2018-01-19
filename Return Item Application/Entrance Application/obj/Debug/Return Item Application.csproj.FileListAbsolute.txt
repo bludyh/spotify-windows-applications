@@ -13,3 +13,19 @@ C:\Users\Thao Nguyen\spotify-windows-applications\Return Item Application\Entran
 C:\Users\Thao Nguyen\spotify-windows-applications\Return Item Application\Entrance Application\obj\Debug\Return Item Application.csproj.GenerateResource.Cache
 C:\Users\Thao Nguyen\spotify-windows-applications\Return Item Application\Entrance Application\obj\Debug\Entrance Application.exe
 C:\Users\Thao Nguyen\spotify-windows-applications\Return Item Application\Entrance Application\obj\Debug\Entrance Application.pdb
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\bin\Debug\Entrance Application.exe.config
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\bin\Debug\Entrance Application.exe
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\bin\Debug\Entrance Application.pdb
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\bin\Debug\MySql.Data.dll
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\bin\Debug\Phidget22.NET.dll
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\bin\Debug\MySql.Data.xml
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\bin\Debug\Phidget22.NET.pdb
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\bin\Debug\Phidget22.NET.xml
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\obj\Debug\Return Item Application.csprojResolveAssemblyReference.cache
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\obj\Debug\Entrance_Application.Form1.resources
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\obj\Debug\Entrance_Application.Login.resources
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\obj\Debug\Entrance_Application.Properties.Resources.resources
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\obj\Debug\Return Item Application.csproj.GenerateResource.Cache
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\obj\Debug\Return Item Application.csproj.CoreCompileInputs.cache
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\obj\Debug\Entrance Application.exe
+C:\Users\ruben\Documents\Final Apps\Return Item Application\Entrance Application\obj\Debug\Entrance Application.pdb
