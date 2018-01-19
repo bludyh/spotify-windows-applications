@@ -122,6 +122,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.pn_visitorStatistic.SuspendLayout();
@@ -154,6 +155,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_spot
@@ -762,7 +764,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(1908, 782);
+            this.groupBox1.Size = new System.Drawing.Size(1908, 758);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             // 
@@ -1028,7 +1030,7 @@
             this.tab_visitorOverview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tab_visitorOverview.Name = "tab_visitorOverview";
             this.tab_visitorOverview.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tab_visitorOverview.Size = new System.Drawing.Size(1916, 792);
+            this.tab_visitorOverview.Size = new System.Drawing.Size(1916, 768);
             this.tab_visitorOverview.TabIndex = 0;
             this.tab_visitorOverview.Text = "Event Management";
             this.tab_visitorOverview.UseVisualStyleBackColor = true;
@@ -1038,11 +1040,11 @@
             this.tabControl1.Controls.Add(this.tab_visitorOverview);
             this.tabControl1.Controls.Add(this.tab_statistics);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 123);
+            this.tabControl1.Location = new System.Drawing.Point(0, 147);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1924, 825);
+            this.tabControl1.Size = new System.Drawing.Size(1924, 801);
             this.tabControl1.TabIndex = 7;
             // 
             // tab_statistics
@@ -1051,7 +1053,7 @@
             this.tab_statistics.Controls.Add(this.pn_chartStatistics);
             this.tab_statistics.Location = new System.Drawing.Point(4, 29);
             this.tab_statistics.Name = "tab_statistics";
-            this.tab_statistics.Size = new System.Drawing.Size(1916, 792);
+            this.tab_statistics.Size = new System.Drawing.Size(1916, 768);
             this.tab_statistics.TabIndex = 3;
             this.tab_statistics.Text = "Statistics";
             this.tab_statistics.UseVisualStyleBackColor = true;
@@ -1288,13 +1290,24 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1924, 123);
+            this.panel1.Size = new System.Drawing.Size(1924, 147);
             this.panel1.TabIndex = 5;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(59, 7);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(187, 140);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -1305,6 +1318,7 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.Text = "Event Overview";
@@ -1352,6 +1366,7 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1455,6 +1470,7 @@
         private System.Windows.Forms.Label lb_textFreeSpt;
         private System.Windows.Forms.Label lb_freeSpot;
         private System.Windows.Forms.Label lb_textCheckedIn;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

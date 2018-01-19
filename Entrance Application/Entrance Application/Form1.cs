@@ -139,6 +139,7 @@ namespace Entrance_Application {
                 else {
                     lb_status.ForeColor = Color.Red;
                     lb_status.Text = "INVALID!!!!";
+                    lb_balaceCheckIn.Text = "";
                     SoundPlayer audio = new SoundPlayer(Entrance_Application.Properties.Resources.Alert);
                     audio.Play();
                 }
@@ -147,7 +148,7 @@ namespace Entrance_Application {
             {
                 rfid = e.Tag;
                 int id = dh.getVisitorIdbyRFID(e.Tag);
-                label2.Text = e.Tag;
+             //   label2.Text = e.Tag;
                 if (dh.CheckRFID(e.Tag)) //check valid rfid----> Yes
                 {
                     if (dh.CheckIfBorrowedItems(id))//This visitor borrowed (some) item(s)
@@ -271,7 +272,7 @@ namespace Entrance_Application {
         private void btn_withdrawAndCheckOut_Click(object sender, EventArgs e)
         {
 
-            DialogResult d = MessageBox.Show(string.Format("Withdraw: {0}, ", dh.GetBalanceOfaVisitor(lb_checkOUt.Text)), "Question", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DialogResult d = MessageBox.Show(string.Format("Withdraw: {0}, ", dh.GetBalanceOfaVisitor(rfid)), "Question", MessageBoxButtons.OK, MessageBoxIcon.Information);
             int id = dh.getVisitorIdbyRFID(rfid);
             dh.DeleteRfid(id);
             Print();

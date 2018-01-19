@@ -81,6 +81,7 @@
             this.Renttime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Return = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.lb_nameRent = new System.Windows.Forms.Label();
             this.lb_rfidRental = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.btn_payRental = new System.Windows.Forms.Button();
@@ -89,7 +90,7 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lb_nameRent = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tab_Store.SuspendLayout();
@@ -106,11 +107,13 @@
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dt_rental)).BeginInit();
             this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.lb_DateTime2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -748,6 +751,17 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Bracelet Info";
             // 
+            // lb_nameRent
+            // 
+            this.lb_nameRent.AutoSize = true;
+            this.lb_nameRent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_nameRent.Location = new System.Drawing.Point(121, 71);
+            this.lb_nameRent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lb_nameRent.Name = "lb_nameRent";
+            this.lb_nameRent.Size = new System.Drawing.Size(58, 20);
+            this.lb_nameRent.TabIndex = 10;
+            this.lb_nameRent.Text = "RFID:";
+            // 
             // lb_rfidRental
             // 
             this.lb_rfidRental.AutoSize = true;
@@ -822,16 +836,15 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // lb_nameRent
+            // pictureBox1
             // 
-            this.lb_nameRent.AutoSize = true;
-            this.lb_nameRent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_nameRent.Location = new System.Drawing.Point(121, 71);
-            this.lb_nameRent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lb_nameRent.Name = "lb_nameRent";
-            this.lb_nameRent.Size = new System.Drawing.Size(58, 20);
-            this.lb_nameRent.TabIndex = 10;
-            this.lb_nameRent.Text = "RFID:";
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(71, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(160, 130);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -841,6 +854,7 @@
             this.Controls.Add(this.tab_Store);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.Text = "Store Management";
@@ -868,6 +882,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dt_rental)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -939,6 +954,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Renttime;
         private System.Windows.Forms.DataGridViewTextBoxColumn Return;
         private System.Windows.Forms.Label lb_nameRent;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

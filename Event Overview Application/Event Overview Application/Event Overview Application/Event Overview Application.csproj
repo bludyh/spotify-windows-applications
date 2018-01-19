@@ -177,6 +177,8 @@
     <None Include="Resources\ZONE F.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\sportify logo PNG.png" />
+    <None Include="Resources\logo.jpeg" />
     <Content Include="Resources\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

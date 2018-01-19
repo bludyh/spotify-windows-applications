@@ -447,6 +447,7 @@ namespace Store_Application {
         // make a payment for visitor
         private void button3_Click(object sender, EventArgs e)
         {
+
             rfid = lb_rfid_purchase.Text;
             decimal total = 0;
             decimal balance = dh.GetBalance(lb_rfid_purchase.Text); //But it shows firstname of visitor???
@@ -470,6 +471,7 @@ namespace Store_Application {
                 lb_rfid_purchase.Text = "";
                 button3.Enabled = false;
                 lb_total.Text = "";
+                lb_test.Text = "";
 
                 //clear the datagridview 
                 dt_cart.Rows.Clear();
@@ -515,6 +517,41 @@ namespace Store_Application {
                 }
             }
 
+        }
+        //Print rental bills
+        public void PrintRental()
+        {
+            PrintDialog pd = new PrintDialog();
+            pdoc = new PrintDocument();
+            PrinterSettings ps = new PrinterSettings();
+            Font font = new Font("Courier New", 15);
+
+            PaperSize psize = new PaperSize("Custom", 100, 100);
+            //ps.DefaultPageSettings.PaperSize = psize;
+
+            pd.Document = pdoc;
+            pd.Document.DefaultPageSettings.PaperSize = psize;
+            pdoc.DefaultPageSettings.PaperSize.Height = 50;
+
+            pdoc.DefaultPageSettings.PaperSize.Width = 50;
+
+            pdoc.PrintPage += new PrintPageEventHandler(pdoc_PrintPageRent);
+
+            DialogResult result = pd.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                PrintPreviewDialog pp = new PrintPreviewDialog();
+                pp.Document = pdoc;
+                pp.Width = 50;
+                pp.Height = 50;
+                pp.PerformAutoScale();
+                result = pp.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    pdoc.Print();
+                }
+            }
+            lb_rfidRental.Text = lb_nameRent.Text = lb_rentTotal.Text = "";
         }
         void pdoc_PrintPage(object sender, PrintPageEventArgs e)
         {
@@ -578,7 +615,68 @@ namespace Store_Application {
 
             Offset = Offset + 20;
         }
+        void pdoc_PrintPageRent(object sender, PrintPageEventArgs e)
+        {
+            Graphics graphics = e.Graphics;
+            Font font = new Font("Courier New", 10);
+            float fontHeight = font.GetHeight();
+            int startX = 50;
+            int startY = 55;
+            int Offset = 40;
+            decimal totalPrice = 0;
 
+            //  string visitor_name = dh.getVisitorNameByRFID(rfid);
+
+            graphics.DrawString("SPORTIFY EVENT", new Font("Courier New", 16),
+                                new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+
+            graphics.DrawString("Rental", new Font("Courier New", 16),
+                                new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+            graphics.DrawString("VISITOR: " + dh.getVisitorNameByRFID(rfid) + "--" + rfid, new Font("Courier New", 16),
+                               new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+
+            graphics.DrawString("" + DateTime.Now, new Font("Courier New", 10),
+                                new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+
+            String underLine = "--------------------------";
+            graphics.DrawString(underLine,
+                     new Font("Courier New", 14),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+            Offset = Offset + 20;
+            foreach (RentalItem i in listItemRent)
+            {
+                graphics.DrawString(i.Item_quantity + " x " +( i.Item_price+i.Deposit) + "      "+ i.Item_name,
+                    new Font("Courier New", 13),
+                    new SolidBrush(Color.Black), startX, startY + Offset);
+
+                Offset = Offset + 20;
+                totalPrice += i.Item_quantity *(i.Deposit+ i.Item_price);
+            }
+            String underLine2 = "--------------------------";
+            graphics.DrawString(underLine2,
+                     new Font("Courier New", 14),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+            graphics.DrawString("TOTAL     : " + Convert.ToString(totalPrice) + "",
+                     new Font("Courier New", 14),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+
+            Offset = Offset + 20;
+            graphics.DrawString("*****" + "THANKS FOR YOUR VISIT" + "*****", new Font("Courier New", 13),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+
+            Offset = Offset + 20;
+
+            graphics.DrawString(underLine, new Font("Courier New", 14),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+
+            Offset = Offset + 20;
+        }
         //Adjust Item when double-click on the row in datagridview Cart ////Havent done 14/12
         private void AdjustItemInCart() {
             AdjustQuantity ad = new AdjustQuantity();
@@ -596,7 +694,7 @@ namespace Store_Application {
         private decimal totalRentPrice() {
             decimal totalPrice = 0;
             foreach (RentalItem i in listItemRent) {
-                totalPrice += (i.Item_price * i.Deposit)*i.Item_quantity;
+                totalPrice += (i.Item_price + i.Deposit)*i.Item_quantity;
             }
             return totalPrice;
         }
@@ -723,12 +821,13 @@ namespace Store_Application {
                 MessageBox.Show("Print the bill....", "Success purchasing", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //Print the bill
+                PrintRental();
                 int height = dt_cart.Height;
-                dt_cart.Height = dt_cart.RowCount * dt_cart.RowTemplate.Height * 2;
-                bmp = new Bitmap(dt_cart.Width, dt_cart.Height);
-                dt_cart.DrawToBitmap(bmp, new Rectangle(0, 0, dt_cart.Width, dt_cart.Height));
-                dt_cart.Height = height;
-                printPreviewDialog1.ShowDialog();
+              //  dt_cart.Height = dt_cart.RowCount * dt_cart.RowTemplate.Height * 2;
+              //  bmp = new Bitmap(dt_cart.Width, dt_cart.Height);
+              //  dt_cart.DrawToBitmap(bmp, new Rectangle(0, 0, dt_cart.Width, dt_cart.Height));
+              //  dt_cart.Height = height;
+              //  printPreviewDialog1.ShowDialog();
                 lb_rfid_purchase.ForeColor = Color.Black;
                 lb_rfid_purchase.Text = "";
                 button3.Enabled = false;
@@ -762,7 +861,7 @@ namespace Store_Application {
                 decimal totalPrice = 0;
                 foreach (RentalItem i in listItemRent) {
                    
-                    dt_rental.Rows.Add(i.Item_name, i.Item_quantity, i.Deposit, i.Item_price, i.RentTme, null);
+                    dt_rental.Rows.Add(i.Item_name, i.Item_quantity, i.Deposit, i.Item_price, i.RentTime, null);
                     totalPrice += (i.Item_price + i.Deposit)*i.Item_quantity;
                     lb_rentTotal.Text = totalPrice.ToString();
                 }

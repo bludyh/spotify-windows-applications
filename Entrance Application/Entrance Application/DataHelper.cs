@@ -188,16 +188,20 @@ namespace Entrance_Application
         //3/12
         ///check if visitor return item yet
         public bool CheckRentalStatus(string rfid) {
+            List<string> list = new List<string>();
             Visitors v = this.getVisitorByRfid(rfid);
             string sql = string.Format("SELECT IFNULL(return_time,'Not return yet') FROM rental WHERE visitor_id={0}", v.Id);
             MySqlCommand command = new MySqlCommand(sql, connection);
             try {
                 connection.Open();
-                string status =command.ExecuteScalar().ToString();
-                if (status == "Not return yet")
-                    return false;
-               
-
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read()) {
+                    list.Add((string)reader["IFNULL(return_time,'Not return yet')"]);
+                }
+                foreach (string s in list) {
+                    if (s == "Not return yet")
+                        return false;
+                }
             }
             catch (MySqlException e) { MessageBox.Show(e.Message); }
             finally { connection.Close(); }

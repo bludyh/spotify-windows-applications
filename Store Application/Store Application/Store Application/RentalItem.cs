@@ -14,7 +14,7 @@ namespace Store_Application
         private string returnTime;
 
         //properties
-       public string RentTme { set { rentTime = value; }get { return rentTime; } }
+       public string RentTime { set { rentTime = value; }get { return rentTime; } }
 
         //constructor
         public RentalItem(int id, string name, string category, decimal price, int quantity, decimal deposit, string rent, string returnn) : base(id, name, category, price, quantity,deposit) {

@@ -87,11 +87,15 @@ namespace Entrance_Application {
                         lb_rental.Items.Clear();
                         list = dh.GetListOfRentaItem(id);
                         int index = 0;
-                        foreach (string i in dh.GetListReturnTime(e.Tag)) {
-                            if (i == "Not return yet") {
-                                lb_rental.Items.Add("" +dh.GetItemNameById( list[index]));
-                            }
-                            index++;
+                        //foreach (string i in dh.GetListReturnTime(e.Tag)) {
+                        //    //if (i == "Not return yet") {
+                        //    //    lb_rental.Items.Add("" +dh.GetItemNameById( list[index]));
+                        //    //}
+                        //    //index++;
+                        //    lb_rental.Items.Add(i);
+                        //}
+                        foreach (int i in dh.GetListOfRentaItem(id)) {
+                            lb_rental.Items.Add(dh.GetItemNameById(i));
                         }
                     }
                     else

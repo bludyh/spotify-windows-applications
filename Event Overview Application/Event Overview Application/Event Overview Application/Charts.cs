@@ -40,29 +40,29 @@ namespace Event_Overview_Application
          //  chart_shops = new Chart();
          //  chart_shops.Series.Add("Profit");
            // id = dh.getStoreIdByName("NIKE");
-            chart_shops.Series["Profit"].Points.AddXY("NIKE", dh.GetProfitByStoreId(1));
+            chart_shops.Series["Revenue"].Points.AddXY("NIKE", dh.GetProfitByStoreId(1));
            // id = dh.getStoreIdByName("ELECTRONICS");
-            chart_shops.Series["Profit"].Points.AddXY("ELECTRONICS", dh.GetProfitByStoreId(2));
+            chart_shops.Series["Revenue"].Points.AddXY("ELECTRONICS", dh.GetProfitByStoreId(2));
            // id = dh.getStoreIdByName("TONYS WOK");
-            chart_shops.Series["Profit"].Points.AddXY("TONY'S WOK", dh.GetProfitByStoreId(3));
+            chart_shops.Series["Revenue"].Points.AddXY("TONY'S WOK", dh.GetProfitByStoreId(3));
             //the pie chart
          //  chart_spentMoney = new Chart();
          //  chart_spentMoney.Series.Add("Total Profit Per day of Shops");
             start = "2018-01-09 00:00:00";
             end = "2018-01-09 23:59:59";
-            chart_spentMoney.Series["Daily profit from shops"].Points.AddXY("DAY 1", dh.GetTotalMoneySpent(start, end));
-            chart_spentMoney.Series["Daily profit from Rental shop"].Points.AddXY("DAY 1", dh.GetTotalSpentMoneyFromRental(start, end));
-            chart_spentMoney.Series["Daily profit from purchase shop"].Points.AddXY("DAY 1", dh.GetTotalSpentMoneyFromPurchase(start, end));
+            chart_spentMoney.Series["Daily revenue from shops"].Points.AddXY("DAY 1", dh.GetTotalMoneySpent(start, end));
+            chart_spentMoney.Series["Daily revenue from Rental shop"].Points.AddXY("DAY 1", dh.GetTotalSpentMoneyFromRental(start, end));
+            chart_spentMoney.Series["Daily revenue from purchase shop"].Points.AddXY("DAY 1", dh.GetTotalSpentMoneyFromPurchase(start, end));
             start = "2018-01-10 00:00:00";
             end = "2018-01-10 23:59:59";
-            chart_spentMoney.Series["Daily profit from shops"].Points.AddXY("DAY 2", dh.GetTotalMoneySpent(start, end));
-            chart_spentMoney.Series["Daily profit from Rental shop"].Points.AddXY("DAY 2", dh.GetTotalSpentMoneyFromRental(start, end));
-            chart_spentMoney.Series["Daily profit from purchase shop"].Points.AddXY("DAY 2", dh.GetTotalSpentMoneyFromPurchase(start, end));
+            chart_spentMoney.Series["Daily revenue from shops"].Points.AddXY("DAY 2", dh.GetTotalMoneySpent(start, end));
+            chart_spentMoney.Series["Daily revenue from Rental shop"].Points.AddXY("DAY 2", dh.GetTotalSpentMoneyFromRental(start, end));
+            chart_spentMoney.Series["Daily revenue from purchase shop"].Points.AddXY("DAY 2", dh.GetTotalSpentMoneyFromPurchase(start, end));
             start = "2018-01-12 00:00:00";
             end = "2018-01-12 23:59:59";
-            chart_spentMoney.Series["Daily profit from shops"].Points.AddXY("DAY 3", dh.GetTotalMoneySpent(start, end));
-            chart_spentMoney.Series["Daily profit from Rental shop"].Points.AddXY("DAY 3", dh.GetTotalSpentMoneyFromRental(start, end));
-            chart_spentMoney.Series["Daily profit from purchase shop"].Points.AddXY("DAY 3", dh.GetTotalSpentMoneyFromPurchase(start, end));
+            chart_spentMoney.Series["Daily revenue from shops"].Points.AddXY("DAY 3", dh.GetTotalMoneySpent(start, end));
+            chart_spentMoney.Series["Daily revenue from Rental shop"].Points.AddXY("DAY 3", dh.GetTotalSpentMoneyFromRental(start, end));
+            chart_spentMoney.Series["Daily revenue from purchase shop"].Points.AddXY("DAY 3", dh.GetTotalSpentMoneyFromPurchase(start, end));
             chart_spentMoney.Show();
             /*-----------------------*/
             
@@ -110,7 +110,7 @@ namespace Event_Overview_Application
             //for profit parts
             start = "2018-01-09 00:00:00";
             end = "2018-01-09 23:59:59";
-            xlWorkSheet.Cells[1, 10] = "Total profit per day ";
+            xlWorkSheet.Cells[1, 10] = "Total revenue per day ";
             xlWorkSheet.Cells[2, 9] = "Day 1";
             xlWorkSheet.Cells[2, 10] = dh.GetTotalMoneySpent(start,end).ToString();
 
@@ -127,7 +127,7 @@ namespace Event_Overview_Application
             /*------------------*/
             start = "2018-01-09 00:00:00";
             end = "2018-01-09 23:59:59";
-            xlWorkSheet.Cells[1, 11] = "Total profit from Rental shops per day ";
+            xlWorkSheet.Cells[1, 11] = "Total revenue from Rental shops per day ";
             xlWorkSheet.Cells[2, 11] = dh.GetTotalSpentMoneyFromRental(start, end).ToString();
 
 
@@ -141,7 +141,7 @@ namespace Event_Overview_Application
             /*------*/
             start = "2018-01-09 00:00:00";
             end = "2018-01-09 23:59:59";
-            xlWorkSheet.Cells[1, 12] = "Total profit from Purchase shops per day ";
+            xlWorkSheet.Cells[1, 12] = "Total Revenue from Purchase shops per day ";
             xlWorkSheet.Cells[2, 12] = dh.GetTotalSpentMoneyFromPurchase(start, end).ToString();
 
 
@@ -171,7 +171,7 @@ namespace Event_Overview_Application
             chartPage.Export(@"C:\Users\Thao Nguyen\Desktop\excel_chart_export.bmp", "BMP", misValue);
             chartPage1.Export(@"C:\Users\Thao Nguyen\Desktop\excel_chart_export.bmp", "BMP", misValue);
 
-            xlWorkBook.SaveAs("StatisticsProfit-informations.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            xlWorkBook.SaveAs("StatisticsRevenue-informations.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);
             xlApp.Quit();
 
@@ -234,7 +234,7 @@ namespace Event_Overview_Application
                 doc.Add(p2); doc.Add(p3); doc.Add(p4); doc.Add(p5); doc.Add(p6); doc.Add(p7); doc.Add(p8);
                 doc.Add(p9); doc.Add(p10);
                 //add chart to pdf file
-                Paragraph p11 = new Paragraph("Chart: Total profit per shop");
+                Paragraph p11 = new Paragraph("Chart: Total Revenue per shop");
                 var chartImage = new MemoryStream();
                 chart_shops.SaveImage(chartImage, ChartImageFormat.Png);
                 iTextSharp.text.Image chart_image = iTextSharp.text.Image.GetInstance(chartImage.GetBuffer());
@@ -245,7 +245,7 @@ namespace Event_Overview_Application
                 chart_spentMoney.SaveImage(chartImage1, ChartImageFormat.Png);
                 iTextSharp.text.Image chart_image1 = iTextSharp.text.Image.GetInstance(chartImage1.GetBuffer());
                 doc.Add(chart_image1);
-                Paragraph p12 = new Paragraph("Chart: Total propfit per day from rental and purchase shops");
+                Paragraph p12 = new Paragraph("Chart: Total Revenue per day from rental and purchase shops");
                 doc.Add(p12);
                 doc.Close();
                 MessageBox.Show("PDF file created succesfully!!");
